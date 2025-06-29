@@ -26,7 +26,6 @@ public class Usuario {
 				", saldo=" + saldo
 				+ ", carrito=" + carrito + "]";
 	}
-
 	
 	// ******************* GETTERS ************************
 	public String getNombreUser() {
@@ -44,6 +43,9 @@ public class Usuario {
 	public ArrayList<Articulo> getCarrito() {
 		ArrayList<Articulo> copiaCarrito = new ArrayList<Articulo>(this.carrito);
 		return copiaCarrito;
+		// Cuando muestro el carrito parece ser que muestra el stock
+		// de la lista de articulos. El objetivo es mostrar la cant
+		// que el usuario agrego a su carrito.
 	}
 
 	// ************ METODOS AGREGAR/RETIRAR SALDO ****************
@@ -76,7 +78,7 @@ public class Usuario {
 	 * }
 	 */
 
-	/*
+	/* ***************** A DEFINIR ****************
 	 * AL CREAR EL USUARIO LE DAMOS UN IMPORTE INICIAL DE 0 EN CONSTRUCTOR 
 	 * public void
 	 * setSaldo(double saldo) { this.saldo = saldo; }

@@ -11,6 +11,17 @@ public class Main {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		
+		/* En orden de la consigna es necesario crear al incio
+		 * del programa el objeto Empleado, la idea es consultar
+		 * que tipo de rol es el usuario que quiere interactuar.
+		 * 
+		 * Si es Empleado, derivamos a menu para empleado, pero antes
+		 * debera introducir sus credenciales.
+		 * 
+		 * Si es un cliente, verificamos si esta en la lista de usuarios registrados
+		 * y si no lo esta, damos un menu para registrarse o salir.
+		 * El usuario cliente si o si tiene que registrarse para operar.
+		 */
 		
 		//CREO UN ARTICULO PARA PROBAR
 		
@@ -33,6 +44,8 @@ public class Main {
 		
 		
 		if(passUDos.equals(passU)) {
+			// Cuando creo este nuevo objeto en este ciclo, no puedo utilizarlo afuera
+			// TODO : Averiguar como solucionar esto
 			Usuario usuario = new Usuario(nombreU, passU);
 			containerUser.agregarUsuario(usuario);
 			System.out.println("Usuario añadido con exito");
@@ -45,8 +58,11 @@ public class Main {
 		
 		}
 		
+		
+		// Pruebo pasando por parametro un nombre que SE que yo ingrese antes
 		Usuario usuarioActual = containerUser.getUser("Yamila");
 		
+		// Al añadir el item al carrito del usuario, se baja el stock
 		usuarioActual.agregarItem(articulo1, 2);
 
 		
@@ -56,6 +72,7 @@ public class Main {
 			System.out.println(usuario);
 		}
 		
+		// Cuando muestro el carrito, muestra el stock del articulo y no cuantos esta comprando
 		System.out.println(usuarioActual.getCarrito());
 
 		

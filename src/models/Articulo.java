@@ -21,9 +21,9 @@ public class Articulo {
 	@Override
 	public String toString() {
 		return "Articulo [ID=" + ID +
-				", nombre=" + nombre + 
-				", precioNeto=" + precioNeto + 
-				", stock=" + stock + "]";
+				",\n nombre=" + nombre + 
+				",\n precioNeto=" + precioNeto + 
+				",\n stock=" + stock + "]";
 	}
 	
 	// ******************* GETTERS *******************************
@@ -55,8 +55,7 @@ public class Articulo {
 	}
 
 	// Con este setter se restara una cantidad de unidades
-	// que el usuario "Cliente" agregue a su carrito.
-	
+	// que el usuario "Cliente" agregue a su carrito.	
 	public void restarStock(int cant) {
 		this.stock -= cant;
 	}

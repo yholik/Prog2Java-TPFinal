@@ -33,4 +33,8 @@ public class UsuarioContainer {
 		}
 		return usuarioBuscado;
 	}
+	
+	/* TODO 
+	 * Es necesario crear un metodo para eliminar un usuario de la lista?
+	 */
 }
