@@ -7,14 +7,14 @@ public class Usuario {
 	private String nombreUser;
 	private String passwordUser;
 	private double saldo;
-	private ArrayList<Articulo> carrito;
-
+	private Carrito carrito;
+	
 	// ***************  CONSTRUCTOR DE USUARIO *******************
 	public Usuario(String nombre, String password) {
 		this.nombreUser = nombre;
 		this.passwordUser = password;
 		this.saldo = 0; //SE DEBERA AGREGAR SALDO LUEGO DE CREAR USUARIO
-		this.carrito = new ArrayList<Articulo>();
+		this.carrito = new Carrito();
 	}
 
 	// ************ TO STRING PARA MOSTRAR EL MODELO CORRECTAMENTE ********
@@ -22,30 +22,27 @@ public class Usuario {
 	
 	@Override
 	public String toString() {
-		return "Usuario [nombreUser=" + nombreUser +
-				", saldo=" + saldo
-				+ ", carrito=" + carrito + "]";
+		return "Usuario "
+				+ "Nombre: " + this.nombreUser +
+				", Saldo: $" + this.saldo;
 	}
 	
 	// ******************* GETTERS ************************
 	public String getNombreUser() {
-		return nombreUser;
+		return this.nombreUser;
 	}
-
+	
+	//TODO Hacer un metodo validar contraseña, getPassword es mala practica
 	public String getPasswordUser() {
-		return passwordUser;
+		return this.passwordUser;
 	}
 
 	public double getSaldo() {
-		return saldo;
+		return this.saldo;
 	}
-
-	public ArrayList<Articulo> getCarrito() {
-		ArrayList<Articulo> copiaCarrito = new ArrayList<Articulo>(this.carrito);
-		return copiaCarrito;
-		// Cuando muestro el carrito parece ser que muestra el stock
-		// de la lista de articulos. El objetivo es mostrar la cant
-		// que el usuario agrego a su carrito.
+	
+	public Carrito getCarrito() {
+		return this.carrito;
 	}
 
 	// ************ METODOS AGREGAR/RETIRAR SALDO ****************
@@ -56,25 +53,7 @@ public class Usuario {
 	public void retirarSaldo(double importe) {
 		this.saldo -= importe;
 	}
-	
-	//TODO confirmar, manejar un solo objeto en el carrito con la cantidad
-	public void agregarItem(Articulo item, int cant) {
-		Articulo itemCarrito = new Articulo(
-				item.getID(), 
-				item.getNombre(), 
-				item.getPrecioNeto(), 
-				cant);
-		
-		carrito.add(itemCarrito);
-		
-		item.restarStock(cant);
-	}
-	
-	public void eliminarItem(Articulo item) {
-		carrito.remove(item);
-	}
-	
-	
+	//
 	// ***************** SETTERS *********************
 	/*
 	 * TODO REVISAR, SI EL USUARIO AL REGISTRAR COLOCA CLAVE, QUEREMOS QUE PUEDA MODIFICARLA
@@ -96,9 +75,5 @@ public class Usuario {
 	 * this.nombreUser = nombreUser;
 	 * }
 	 */
-	
-	/*30-06-2025 12:40
-	 * Se agrego el this en el constructor
-	 * Se modifico el metodo agregarItem*/
 }
 

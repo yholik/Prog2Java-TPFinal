@@ -17,7 +17,6 @@ public class Articulo {
 	
 	// *************** TO STRING ******************
 	// Para mostrar el modelo de articulo correctamente
-	//Le agregue los famosos this
 	@Override
 	public String toString() {
 		return "Articulo [ID=" + this.ID +
@@ -28,20 +27,20 @@ public class Articulo {
 	
 	// ******************* GETTERS *******************************
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 
 
 	public double getPrecioNeto() {
-		return precioNeto;
+		return this.precioNeto;
 	}
 
 	public int getStock() {
-		return stock;
+		return this.stock;
 	}
 	
 	public int getID() {
-		return ID;
+		return this.ID;
 	}
 	
 	// **************** SETTERS *******************************

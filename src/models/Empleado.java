@@ -15,10 +15,12 @@ public class Empleado {
 	
 	// *************** GETTERS *******************
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
+	
+	//TODO Hacer un metodo validar contraseña, getPassword es mala practica
 	public String getPasswordEmpleado() {
-		return passwordEmpleado;
+		return this.passwordEmpleado;
 	}
 	
 	

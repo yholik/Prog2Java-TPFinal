@@ -58,13 +58,11 @@ public class Main {
 		
 		}
 		
-		
-		//TODO Editado. Ahora se obtiene user.index.0 y no "Yamila"
-		// Pruebo pasando por parametro un nombre que SE que yo ingrese antes
+		//TODO Sacar usuario harcodeado
 		Usuario usuarioActual = containerUser.getFirstUser();
 		
 		// Al añadir el item al carrito del usuario, se baja el stock
-		usuarioActual.agregarItem(articulo1, 2);
+		usuarioActual.getCarrito().agregarItem(articulo1, 2);
 
 		
 		ArrayList<Usuario> listadoUsers = containerUser.getTodos();
@@ -73,8 +71,11 @@ public class Main {
 			System.out.println(usuario);
 		}
 		
-		// Cuando muestro el carrito, muestra el stock del articulo y no cuantos esta comprando
-		System.out.println(usuarioActual.getCarrito());
+		//TODO Se debe implementar una clase para listar los articulos
+		ArrayList<Articulo> carritoAux = usuarioActual.getCarrito().getArticulos();
+		for (Articulo item : carritoAux) {
+			System.out.println(item.toString());
+		}
 
 		
 	}
