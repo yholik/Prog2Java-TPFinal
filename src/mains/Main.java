@@ -59,8 +59,9 @@ public class Main {
 		}
 		
 		
+		//TODO Editado. Ahora se obtiene user.index.0 y no "Yamila"
 		// Pruebo pasando por parametro un nombre que SE que yo ingrese antes
-		Usuario usuarioActual = containerUser.getUser("Yamila");
+		Usuario usuarioActual = containerUser.getFirstUser();
 		
 		// Al añadir el item al carrito del usuario, se baja el stock
 		usuarioActual.agregarItem(articulo1, 2);

@@ -34,6 +34,10 @@ public class UsuarioContainer {
 		return usuarioBuscado;
 	}
 	
+	public Usuario getFirstUser() {
+		return this.listaUsuarios.get(0);
+	}
+	
 	/* TODO 
 	 * Es necesario crear un metodo para eliminar un usuario de la lista?
 	 */

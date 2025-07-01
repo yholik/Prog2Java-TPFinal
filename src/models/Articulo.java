@@ -17,13 +17,13 @@ public class Articulo {
 	
 	// *************** TO STRING ******************
 	// Para mostrar el modelo de articulo correctamente
-	
+	//Le agregue los famosos this
 	@Override
 	public String toString() {
-		return "Articulo [ID=" + ID +
-				",\n nombre=" + nombre + 
-				",\n precioNeto=" + precioNeto + 
-				",\n stock=" + stock + "]";
+		return "Articulo [ID=" + this.ID +
+				",\n nombre=" + this.nombre + 
+				",\n precioNeto=" + this.precioNeto + 
+				",\n stock=" + this.stock + "]";
 	}
 	
 	// ******************* GETTERS *******************************

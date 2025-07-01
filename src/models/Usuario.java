@@ -57,10 +57,16 @@ public class Usuario {
 		this.saldo -= importe;
 	}
 	
+	//TODO confirmar, manejar un solo objeto en el carrito con la cantidad
 	public void agregarItem(Articulo item, int cant) {
-		for(int i = 0; i < cant; i++) {
-		carrito.add(item);
-		}
+		Articulo itemCarrito = new Articulo(
+				item.getID(), 
+				item.getNombre(), 
+				item.getPrecioNeto(), 
+				cant);
+		
+		carrito.add(itemCarrito);
+		
 		item.restarStock(cant);
 	}
 	
@@ -90,5 +96,9 @@ public class Usuario {
 	 * this.nombreUser = nombreUser;
 	 * }
 	 */
+	
+	/*30-06-2025 12:40
+	 * Se agrego el this en el constructor
+	 * Se modifico el metodo agregarItem*/
 }
 
