@@ -28,6 +28,7 @@ public class Carrito {
 	
 	public void eliminarItem(Articulo item) {
 		this.articulos.remove(item);
-	}
+		}
+	
 	
 }

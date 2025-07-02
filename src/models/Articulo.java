@@ -30,7 +30,6 @@ public class Articulo {
 		return this.nombre;
 	}
 
-
 	public double getPrecioNeto() {
 		return this.precioNeto;
 	}
@@ -52,10 +51,21 @@ public class Articulo {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	
+	// ************** METODOS PROPIOS DE LA CLASE **************
+	
+	// Para sumar stock, tambien necesario si el usuario resta una
+	// cantidad especifica de productos de su carrito, de manera que
+	// la cant eliminada se reintegre al stock real.
+	public void sumarStock(int cant) {
+		this.stock += cant;
+	}
 
-	// Con este setter se restara una cantidad de unidades
-	// que el usuario "Cliente" agregue a su carrito.	
+	// Para restar stock, se puede reutilizar para que el usuario
+	// quite una cantidad especifica de un articulo de su carrito.
 	public void restarStock(int cant) {
 		this.stock -= cant;
 	}
+	
+	
 }
