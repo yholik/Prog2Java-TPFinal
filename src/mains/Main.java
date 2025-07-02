@@ -4,6 +4,7 @@ import models.Usuario;
 import java.util.ArrayList;
 import java.util.Scanner;
 import containers.UsuarioContainer;
+import containers.ArticuloContainer;
 
 public class Main {
 
@@ -26,9 +27,15 @@ public class Main {
 		//CREO UN ARTICULO PARA PROBAR
 		
 		Articulo articulo1 = new Articulo(1, "Detergente" , 150, 2);
-		
 		UsuarioContainer containerUser = new UsuarioContainer();
+		ArticuloContainer containerArticulo = new ArticuloContainer();
 		
+		
+		// ************ AÑADO EL ARTICULO A LA LISTA DEL CONTAINER ************
+		containerArticulo.agregarArticulo(articulo1);
+		
+		
+		//**************ZONA DE INGRESO****************
 		System.out.println("Para operar tenes que estar logueado");
 		System.out.println("Creemos tu usuario:");
 		
@@ -42,7 +49,7 @@ public class Main {
 		System.out.println("Volve a ingresar tu clave");
 		String passUDos = sc.next();
 		
-		
+		// *************** VERIFICACION CLAVE ********************
 		if(passUDos.equals(passU)) {
 			// Cuando creo este nuevo objeto en este ciclo, no puedo utilizarlo afuera
 			// TODO : Averiguar como solucionar esto
@@ -61,10 +68,15 @@ public class Main {
 		//TODO Sacar usuario harcodeado
 		Usuario usuarioActual = containerUser.getFirstUser();
 		
+		
+		
 		// Al añadir el item al carrito del usuario, se baja el stock
-		usuarioActual.getCarrito().agregarItem(articulo1, 2);
+		usuarioActual.getCarrito().agregarItem(articulo1
+				, 2);
 
 		
+		
+		// *********** LISTANDO USUARIOS REGISTRADOS ****************
 		ArrayList<Usuario> listadoUsers = containerUser.getTodos();
 		System.out.println("Lista de usuarios registrados:");
 		for(Usuario usuario : listadoUsers) {
@@ -77,6 +89,7 @@ public class Main {
 			System.out.println(item.toString());
 		}
 
+		
 		
 	}
 

@@ -8,6 +8,7 @@ import containers.UsuarioContainer;
 
 public class menuClientes {
 
+	private Usuario user;
 	private Scanner sc;
 	private UsuarioContainer containerUser;
 	
@@ -29,7 +30,7 @@ public class menuClientes {
 			int opc = sc.nextInt();
 			switch (opc) {
             case 1 : accesoCliente();
-            case 2 : agregarNuevoUsuario();
+            case 2 : agregarNuevoUsuario(containerUser);
             case 3 : continuar = false; System.out.println("Saliendo...");
             default : System.out.println("Opción inválida.");
 		}
@@ -42,13 +43,34 @@ public class menuClientes {
 		
 	}
 	
-	public void agregarNuevoUsuario() {
+	public void agregarNuevoUsuario(UsuarioContainer containerUser) {		
+		System.out.println("Ingrese el nombre del usuario nuevo");
+		String nombreNuevo = sc.next();
 		
-		/*System.out.println("Ingrese el nombre del usuario nuevo");
-		do {
-			String nombreNuevo = sc.next();
+		//Verificar si ese nombre existe
+		Usuario usuarioBuscado = containerUser.getUser(nombreNuevo);
+		//TODA LA VALIDACION ES INNECESARIA XQ PUEDEN REPETIRSE LOS USUARIOS
+		if(usuarioBuscado != null) {
+			System.out.println("El usuario ya existe!");
+		}else {
+			boolean listo = false;
+			String nPassword = "";
+			do {
+				System.out.println("Ingrese la contraseña:");
+				nPassword = sc.next();
+				
+				if(!nPassword.isEmpty()) {
+					listo = true;
+				}else {
+					System.out.println("La contraseña no puede estar vaica.");
+				}
+			}while(!listo);
 			
-		}while;*/
+			Usuario nUsuario = new Usuario(nombreNuevo, nPassword);
+			containerUser.agregarUsuario(nUsuario);
+			
+			System.out.println("El usuario se registro correctamente.");
+		}
 		
 		
 		
