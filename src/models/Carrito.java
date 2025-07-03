@@ -27,9 +27,13 @@ public class Carrito {
 	}
 	
 	public void eliminarItem(Articulo articulo, int cant) {
-		articulos.
-		this.articulos.remove(item);
-		articulo.
+		for (Articulo item : articulos) {
+	        if (item.getID() == articulo.getID()) {
+	            this.articulos.remove(item);
+	            break;
+	        }
+	    }
+	    //articulo.reponerStock(cant);
 	}
 	
 }

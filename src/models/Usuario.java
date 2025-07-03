@@ -1,79 +1,69 @@
 package models;
-import models.Articulo;
-import java.util.ArrayList;
 
 public class Usuario {
 
+	private int documentoID;
 	private String nombreUser;
 	private String passwordUser;
 	private double saldo;
 	private Carrito carrito;
-	
-	// ***************  CONSTRUCTOR DE USUARIO *******************
-	public Usuario(String nombre, String password) {
+
+	// *************** CONSTRUCTOR DE USUARIO *******************
+	public Usuario(String nombre, String password, int documento) {
 		this.nombreUser = nombre;
 		this.passwordUser = password;
-		this.saldo = 0; //SE DEBERA AGREGAR SALDO LUEGO DE CREAR USUARIO
+		this.documentoID = documento;
+		this.saldo = 0; // SE DEBERA AGREGAR SALDO LUEGO DE CREAR USUARIO
 		this.carrito = new Carrito();
 	}
 
 	// ************ TO STRING PARA MOSTRAR EL MODELO CORRECTAMENTE ********
-	// Utilizado para mostrar listadoUsers 
-	
+	// Utilizado para mostrar listadoUsers
 	@Override
 	public String toString() {
-		return "Usuario "
-				+ "Nombre: " + this.nombreUser +
-				", Saldo: $" + this.saldo;
+		return "Usuario " + "Nombre: " + this.nombreUser + ", Saldo: $" + this.saldo;
 	}
-	
+
 	// ******************* GETTERS ************************
 	public String getNombreUser() {
 		return this.nombreUser;
 	}
 	
-	//TODO Hacer un metodo validar contraseña, getPassword es mala practica
-	public String getPasswordUser() {
-		return this.passwordUser;
+	public int getID() {
+		return this.documentoID;
 	}
 
 	public double getSaldo() {
 		return this.saldo;
 	}
-	
+
 	public Carrito getCarrito() {
 		return this.carrito;
 	}
+
+	public boolean validarPassword(String claveIngresada) {
+		boolean validez = false;
+		if (this.passwordUser.equals(claveIngresada)) {
+			validez = true;
+		}
+		return validez;
+	}
+	
+	public void modificarClave(String nuevaClave, String claveAntigua) {
+		if(this.validarPassword(claveAntigua)) {
+			this.passwordUser = nuevaClave;
+		}
+	}
+	
+	//*************************************************************
 
 	// ************ METODOS AGREGAR/RETIRAR SALDO ****************
 	public void agregarSaldo(double importe) {
 		this.saldo += importe;
 	}
-	
+
 	public void retirarSaldo(double importe) {
 		this.saldo -= importe;
 	}
-	//
-	// ***************** SETTERS *********************
-	/*
-	 * TODO REVISAR, SI EL USUARIO AL REGISTRAR COLOCA CLAVE, QUEREMOS QUE PUEDA MODIFICARLA
-	 * DESPUES? 
-	 * public void setPasswordUser(String passwordUser) { 
-	 * this.passwordUser = passwordUser; 
-	 * }
-	 */
-
-	/* ***************** A DEFINIR ****************
-	 * AL CREAR EL USUARIO LE DAMOS UN IMPORTE INICIAL DE 0 EN CONSTRUCTOR 
-	 * public void
-	 * setSaldo(double saldo) { this.saldo = saldo; }
-	 */
-
-
-	/* TODO REVISAR: SI EL USUARIO SE CREA CON NOMBRE, QUEREMOS QUE PUEDA MODIFICAR SU NOMBRE LUEGO?
-	 * public void setNombreUser(String nombreUser) { 
-	 * this.nombreUser = nombreUser;
-	 * }
-	 */
+	// ************************************************************
 }
-
