@@ -14,20 +14,22 @@ public class Carrito {
 		return this.articulos;
 	}
 	
-	public void agregarItem(Articulo item, int cant) {
-		Articulo itemCarrito = new Articulo(
-				item.getID(), 
-				item.getNombre(), 
-				item.getPrecioNeto(), 
+	public void agregarItem(Articulo articulo, int cant) {
+		Articulo articuloCarrito = new Articulo(
+				articulo.getID(), 
+				articulo.getNombre(), 
+				articulo.getPrecioNeto(), 
 				cant);
 			
-		this.articulos.add(itemCarrito);
+		this.articulos.add(articuloCarrito);
 			
-		item.restarStock(cant);
+		articulo.restarStock(cant);
 	}
 	
-	public void eliminarItem(Articulo item) {
+	public void eliminarItem(Articulo articulo, int cant) {
+		articulos.
 		this.articulos.remove(item);
+		articulo.
 	}
 	
 }
