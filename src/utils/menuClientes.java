@@ -75,7 +75,7 @@ public class menuClientes {
 		boolean listo = false;
 		String nPassword = "";// La inicializo por las dudas
 		String confirmacionPassword = "";
-
+		
 		do {
 			// Ingresa por primera vez la contraseña
 			System.out.println("Ingrese la contraseña:");
@@ -95,6 +95,7 @@ public class menuClientes {
 			}
 		} while (!listo);
 
+	
 		Usuario nUsuario = new Usuario(nombreNuevo, nPassword);
 		containerUser.agregarUsuario(nUsuario);
 
