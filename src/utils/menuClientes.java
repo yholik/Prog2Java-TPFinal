@@ -45,6 +45,24 @@ public class menuClientes {
 		}
 	}
 
+	
+	//Menu para los clientes que ya estan registrados y logeados corectamente
+	private void menuClientesLogeados(Usuario user) {
+		boolean continuar = true;
+		Usuario cliente = user;
+		while(continuar) {
+			System.out.println("---Bienvenido "+cliente.getNombreUser()+"---");
+			System.out.println("¿Que desea hacer?");
+			System.out.println("1. Agregar articulo al carrito");
+			System.out.println("2. Saldo(Agregar o Retirar)");
+			System.out.println("3. Ver carrito");
+			System.out.println("4. Pagar");
+			
+		}
+		
+
+	}
+	
 	// Metodo de acceso cliente
 	public void accesoCliente() {
 		System.out.println("Ingrese su nombre de usuario:");
@@ -58,8 +76,7 @@ public class menuClientes {
 		
 		if (cliente != null) {
 			System.out.println("Acceso permitido. Bienvenido " + cliente.getNombreUser()+"!");
-			//aca se deberia incluir un acceso al menu de funciones del usuario logeado
-			
+			menuClientesLogeados(cliente);			
 		}else {
 			System.out.println("Nombre de usuario o contraseña incorrectos.");
 		}
