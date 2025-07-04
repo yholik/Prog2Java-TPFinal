@@ -58,8 +58,7 @@ public class MenuCliente {
 		Usuario cliente = user;
 		while (continuar) {
 			System.out.println("---Bienvenido " + cliente.getNombreUser() + "---");
-			System.out.println("Valor de carrito actual: $" + cliente.getCarrito());// Falta metodo calcular valor
-																					// actual
+			System.out.println("Valor de carrito actual: $" + cliente.getCarrito().getSubTotal());
 			System.out.println("¿Que desea hacer?");
 			System.out.println("1. Agregar articulo al carrito");
 			System.out.println("2. Quitar articulo del carrito");
@@ -222,9 +221,9 @@ public class MenuCliente {
 		Usuario cliente = user;
 		Carrito carritoAct = cliente.getCarrito();
 		System.out.println("¿Que articulo desea eliminar?");
-		
-		carritoAct.eliminarItem(art);
-	
+		//TODO debe recibir los articulos de la lista global ya que tambien se encargan de modificar dicho stock.
+		//Lo mismo para el metodo .restarCantidadItem();
+		carritoAct.eliminarItemCompleto(art);
 	
 	}
 
