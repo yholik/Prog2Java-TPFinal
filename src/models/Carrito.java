@@ -26,6 +26,8 @@ public class Carrito {
 		item.restarStock(cant);
 	}
 	
+	 
+	
 	public void eliminarItem(Articulo item) {
 		this.articulos.remove(item);
 		}

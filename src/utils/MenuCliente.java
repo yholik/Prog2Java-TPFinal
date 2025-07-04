@@ -3,6 +3,7 @@ package utils;
 import java.util.Scanner;
 
 import models.Articulo;
+import models.Carrito;
 import models.Usuario;
 import java.util.ArrayList;
 import containers.ArticuloContainer;
@@ -57,21 +58,36 @@ public class MenuCliente {
 		Usuario cliente = user;
 		while (continuar) {
 			System.out.println("---Bienvenido " + cliente.getNombreUser() + "---");
+			System.out.println("Valor de carrito actual: $" + cliente.getCarrito());// Falta metodo calcular valor
+																					// actual
 			System.out.println("¿Que desea hacer?");
 			System.out.println("1. Agregar articulo al carrito");
-			System.out.println("2. Saldo(Agregar o Retirar)");
-			System.out.println("3. Ver carrito");
-			System.out.println("4. Pagar");
-			System.out.println("5. Salir");
+			System.out.println("2. Quitar articulo del carrito");
+			System.out.println("3. Saldo(Agregar o Retirar)");
+			System.out.println("4. Ver carrito");
+			System.out.println("5. Pagar");
+			System.out.println("6. Salir");
 			int opc = sc.nextInt();
 			switch (opc) {
 			case 1:
 				agregarArticuloAlCarrito(cliente);
 				break;
 			case 2:
+
+				break;
+			case 3:
 				manejoSaldo(cliente);
 				break;
+			case 4:
+				break;
+			case 5:
+
+				break;
+			case 6:
+				continuar = false;
+				break;
 			default:
+				System.out.println("Opcion invalida");
 				break;
 			}
 		}
@@ -157,7 +173,7 @@ public class MenuCliente {
 		}
 	}
 
-	//
+	// Opcion 1
 	private void agregarArticuloAlCarrito(Usuario user) {
 		mostrarListaDeArticulos();
 		Usuario cliente = user;
@@ -200,7 +216,19 @@ public class MenuCliente {
 
 	}
 
-	// Manejo de saldo, vuelve a ser un minimenu
+	// Opcion 2
+	private void eliminarArticuloDelCarrito(Usuario user) {
+		//Deberia ir verCarrito();
+		Usuario cliente = user;
+		Carrito carritoAct = cliente.getCarrito();
+		System.out.println("¿Que articulo desea eliminar?");
+		
+		carritoAct.eliminarItem(art);
+	
+	
+	}
+
+	// Opcion 3 Manejo de saldo, vuelve a ser un minimenu
 	private void manejoSaldo(Usuario user) {
 		Usuario cliente = user;
 		boolean continuar = true;
@@ -244,4 +272,20 @@ public class MenuCliente {
 
 	}
 
+	// Opcion 3 ver carrito
+	private void verCarrito(Usuario cliente) {
+		Carrito carritoAct = cliente.getCarrito(); 
+		if(carritoAct == null || carritoAct.getArticulos().isEmpty()) {
+			System.out.println("Tu carrito actualmente esta vacio.");
+			return;
+		}
+		System.out.println("--- MI CARRITO ---");
+		System.out.println("Nombre   |   Cantidad");
+		for(Articulo art : carritoAct.getArticulos()) {
+			
+			//System.out.println(art.getNombre()+": "+ carritoAct.);
+		}
+		
+		
+	}
 }
