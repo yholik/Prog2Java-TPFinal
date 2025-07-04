@@ -166,9 +166,13 @@ public class MenuCliente {
 	// ------------------------ METODOS PARA MENU
 	// LOGEADO-------------------------------
 	private void mostrarListaDeArticulos() {
-		System.out.println("\\n--- LISTA DE ARTICULOS ---");
-		for (Articulo art : artContainer.getListaArticulos()) {
-			System.out.println(art);// Se mostraria con el toString
+		System.out.println("--- LISTA DE ARTICULOS ---");
+		if (artContainer.getFirstArt() != null) {
+			for (Articulo art : artContainer.getListaArticulos()) {
+				System.out.println(art + " \n");
+			}
+		} else {
+			System.out.println("No hay articulos");
 		}
 	}
 
@@ -217,14 +221,13 @@ public class MenuCliente {
 
 	// Opcion 2
 	private void eliminarArticuloDelCarrito(Usuario user) {
-		//Deberia ir verCarrito();
+		// Deberia ir verCarrito();
 		Usuario cliente = user;
 		Carrito carritoAct = cliente.getCarrito();
 		System.out.println("¿Que articulo desea eliminar?");
 		//TODO debe recibir los articulos de la lista global ya que tambien se encargan de modificar dicho stock.
 		//Lo mismo para el metodo .restarCantidadItem();
 		carritoAct.eliminarItemCompleto(art);
-	
 	}
 
 	// Opcion 3 Manejo de saldo, vuelve a ser un minimenu
@@ -273,18 +276,17 @@ public class MenuCliente {
 
 	// Opcion 3 ver carrito
 	private void verCarrito(Usuario cliente) {
-		Carrito carritoAct = cliente.getCarrito(); 
-		if(carritoAct == null || carritoAct.getArticulos().isEmpty()) {
+		Carrito carritoAct = cliente.getCarrito();
+		if (carritoAct == null || carritoAct.getArticulos().isEmpty()) {
 			System.out.println("Tu carrito actualmente esta vacio.");
 			return;
 		}
 		System.out.println("--- MI CARRITO ---");
 		System.out.println("Nombre   |   Cantidad");
-		for(Articulo art : carritoAct.getArticulos()) {
-			
-			//System.out.println(art.getNombre()+": "+ carritoAct.);
+		for (Articulo art : carritoAct.getArticulos()) {
+
+			// System.out.println(art.getNombre()+": "+ carritoAct.);
 		}
-		
-		
+
 	}
 }
