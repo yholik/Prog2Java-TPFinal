@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 import containers.ArticuloContainer;
 import containers.UsuarioContainer;
-import utils.menuClientes;
+import utils.MenuCliente;
 
-public class MainClientes {
+public class MainCliente {
 
 	public static void iniciar(UsuarioContainer containerUser, ArticuloContainer artContainer, Scanner sc){
-		menuClientes menu = new menuClientes(containerUser, artContainer, sc);
+		MenuCliente menu = new MenuCliente(containerUser, artContainer, sc);
 		menu.mostrarMenu();
 	}
 

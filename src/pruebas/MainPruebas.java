@@ -4,7 +4,7 @@ import models.Usuario;
 import java.util.ArrayList;
 import java.util.Scanner;
 import containers.UsuarioContainer;
-import mains.MainClientes;
+import mains.MainCliente;
 import containers.ArticuloContainer;
 
 public class MainPruebas {
@@ -30,7 +30,7 @@ public class MainPruebas {
 				
 				break;
 			case 2:
-				MainClientes.iniciar(containerUser, artContainer, sc);
+				MainCliente.iniciar(containerUser, artContainer, sc);
 				break;
 			case 3:
 				System.out.println("¡Gracias vuelva pronto!");
