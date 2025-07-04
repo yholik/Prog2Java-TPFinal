@@ -3,27 +3,34 @@ import models.Empleado;
 import java.util.Scanner;
 import models.Articulo;
 import containers.ArticuloContainer;
+import containers.UsuarioContainer;
 
 
-/*TODO
+/*
  * 1.Crear un metodo de confirmacion de respuesta SI o No 
- * que devuelva un booleano para evitar repetir codigo.
+ * que devuelva un booleano para evitar repetir codigo.(NO ME DA TIEMPO)
  * 
  * 2.Es necesario llamar a menu principal cuando se decida regresar, no se como
- * es el metodo o si ya existe.
+ * es el metodo o si ya existe.(RESUELTO)
  * 
  * 3.Envolver el menu en un bucle para despues de ejecutar una opcion, vuelva
- * a mostrar el menu hasta que se decida salir.
+ * a mostrar el menu hasta que se decida salir.(RESUELTO)
  * 
- * 4.Revisar la variable global "confirmado" en mostrarMenuEmpleado.
+ * 4.Revisar la variable global "confirmado" en mostrarMenuEmpleado.(RESUELTO)
  * 
  */
 public class MenuEmpleado {
 	private Scanner sc;
 	private ArticuloContainer artContainer;
-	
-
 	Empleado empleadoAutorizado;
+	
+	
+	// --------- CONSTRUCTOR ---------
+	public MenuEmpleado(Empleado empleado, ArticuloContainer artContainer, Scanner sc) {
+		this.empleadoAutorizado = empleado;
+		this.artContainer = artContainer;
+		this.sc = sc;
+	}
 
 	// ---------- MENU INICIO SESION -----------
 	public void menuInicioSesionEmpleado() {
@@ -42,14 +49,10 @@ public class MenuEmpleado {
 			if (userEmpleado.equals(empleadoAutorizado.getNombre())
 					&& empleadoAutorizado.validarPassword(passwordEmpleado)) {
 				System.out.println("Bienvenido al sistema " + empleadoAutorizado.getNombre());
+				this.mostrarMenuEmpleado();
 				confirmado = true;
 			} else {
-				System.out.println("Credenciales ingresadas incorrectas");
-				System.out.println("¿Volver al menu principal?");
-				char respuesta = sc.next().toUpperCase().charAt(0);
-				if (respuesta == 'S') {
-					// PONER MENU PRINCIPAL
-				}
+				System.out.println("Credenciales ingresadas incorrectas");						
 			}
 		} while (!confirmado);
 	}
@@ -57,28 +60,32 @@ public class MenuEmpleado {
 	// ------------ MENU GESTION DE ARTICULOS -------------
 
 	public void mostrarMenuEmpleado() {
-		System.out.println("Selecciona una opcion");
-		System.out.println("1- Ver artículos \n" + 
-						   "2- Agregar artículo \n" +
-						   "3- Modificar artículo \n" +
-						   "4- Eliminar artículo \n" +
-						   "5- Volver al menu principal \n");
-		int opc = sc.nextInt();
-
 		// ----- ZONA DE VARIABLES PARA ESTE METODO -----
+		/* 
+		 * Es importante que confirmado se reinicie SIEMPRE al comenzar un nuevo do-while 
+		 */
 		boolean confirmado = false;
+		boolean ejecutarMenu = true;
 		char respuesta;
 		int ID;
 		String nombre;
 		double precio;
 		int stock;
-
+		
 		// -----------------------------------------------
-
+		
+		while(ejecutarMenu) {
+			System.out.println("Selecciona una opcion");
+			System.out.println("1- Ver artículos \n" + 
+							   "2- Agregar artículo \n" +
+							   "3- Modificar artículo \n" +
+							   "4- Eliminar artículo \n" +
+							   "5- Volver al menu principal \n");
+		int opc = sc.nextInt();
 		switch (opc) {
 		case 1: // ----------- LISTAR ARTICULOS -----------
 			System.out.println("--- LISTA DE ARTICULOS ---");
-			if (artContainer.getFirstArt() != null) {
+			if (!artContainer.isListaVacia()) {
 				for (Articulo art : artContainer.getListaArticulos()) {
 					System.out.println(art + " \n");
 				}
@@ -90,6 +97,7 @@ public class MenuEmpleado {
 		case 2: // ---------- AGREGAR ARTICULO ---------------
 				// ------- Ingresa ID del articulo ----------
 			do {
+				confirmado = false;
 				System.out.print("Ingresa ID del articulo");
 				ID = sc.nextInt();
 				if (artContainer.getArticuloByID(ID) != null) {
@@ -105,6 +113,7 @@ public class MenuEmpleado {
 
 			// -------- Ingresa precio neto del articulo --------
 			do {
+				confirmado = false;
 				System.out.println("Ingresa el precio neto");
 				precio = sc.nextDouble();
 				if (precio == 0) {
@@ -114,14 +123,16 @@ public class MenuEmpleado {
 
 			// -------- Ingresa stock del articulo ---------
 			do {
+				confirmado = false;
 				System.out.println("Ingresa stock del articulo");
 				stock = sc.nextInt();
 				if (stock < 0) {
 					System.out.println("No podes ingresar stock negativo");
 				} else {
 					Articulo articuloNuevo = new Articulo(ID, nombre, precio, stock);
-					confirmado = true;
 					artContainer.agregarArticulo(articuloNuevo);
+					System.out.println("Articulo agregado con exito");
+					confirmado = true;
 				}
 			} while (!confirmado);
 
@@ -129,7 +140,7 @@ public class MenuEmpleado {
 
 		case 3: // ---------- MODIFICAR ARTICULO POR ID ---------
 			// No se como simplificar esta logica
-
+			
 			System.out.println("Ingresa el ID del articulo");
 			ID = sc.nextInt();
 			
@@ -143,6 +154,7 @@ public class MenuEmpleado {
 				System.out.println("Ingresa el nuevo nombre");
 				nombre = sc.next();
 				articuloModificar.setNombre(nombre);
+				System.out.println("Nombre modificado con exito");
 			}
 
 			// ----------- PRECIO ----------------
@@ -152,6 +164,7 @@ public class MenuEmpleado {
 				System.out.println("Ingresa el nuevo precio");
 				precio = sc.nextDouble();
 				articuloModificar.setPrecioNeto(precio);
+				System.out.println("Precio modificado con exito");
 			}
 
 			// --------- STOCK -----------------
@@ -161,21 +174,23 @@ public class MenuEmpleado {
 				System.out.println("Ingresa el nuevo stock");
 				stock = sc.nextInt();
 				articuloModificar.setStock(stock);
+				System.out.println("Stock modificado con exito");
 			}
 			}else{
 				System.out.println("--- Articulo no encontrado ---");
 				//ACA DEBERIA VOLVER AL MENU
-				
 			}
 			break;
 
 		case 4: // --------- ELIMINAR ARTICULO ------------
 			do {
+				confirmado = false;
 				System.out.println("Ingresa el ID del articulo a eliminar");
 				ID = sc.nextInt();
 				if (artContainer.getArticuloByID(ID) != null) {
 					Articulo artAEliminar = artContainer.getArticuloByID(ID);
 					artContainer.eliminarArticulo(artAEliminar);
+					System.out.println("Articuo eliminado con exito");
 					confirmado = true;
 				} else {
 					System.out.println("No existe el articulo");
@@ -185,6 +200,7 @@ public class MenuEmpleado {
 			
 		case 5: 
 			System.out.println("Hasta luego " + empleadoAutorizado.getNombre());
+			ejecutarMenu = false;
 		break;
 		
 		default: 
@@ -193,5 +209,6 @@ public class MenuEmpleado {
 		}
 
 	}
+		}
 
 }
