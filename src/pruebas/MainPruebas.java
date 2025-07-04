@@ -1,0 +1,49 @@
+package pruebas;
+import models.Articulo;
+import models.Usuario;
+import java.util.ArrayList;
+import java.util.Scanner;
+import containers.UsuarioContainer;
+import mains.MainClientes;
+import containers.ArticuloContainer;
+
+public class MainPruebas {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		UsuarioContainer containerUser = new UsuarioContainer();
+		ArticuloContainer artContainer = new ArticuloContainer();
+		
+		boolean continuar = true;
+		int opc ;
+		
+		System.out.println("Bienvenido al sistema de compras");
+		while(continuar) {
+			System.out.println("¿Sos cliente o empleado?");
+			System.out.println("1. Menu Empleado");
+			System.out.println("2. Menu Cliente");
+			System.out.println("3. Salir");
+			opc = sc.nextInt();
+			
+			switch (opc) {
+			case 1:
+				
+				break;
+			case 2:
+				MainClientes.iniciar(containerUser, artContainer, sc);
+				break;
+			case 3:
+				System.out.println("¡Gracias vuelva pronto!");
+			default:
+				System.out.println("¡Opcion invalida!");
+				break;
+			}
+			
+		}
+		
+		
+		
+
+	}
+
+}
