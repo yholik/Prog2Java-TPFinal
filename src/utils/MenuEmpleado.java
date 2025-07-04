@@ -84,14 +84,7 @@ public class MenuEmpleado {
 		int opc = sc.nextInt();
 		switch (opc) {
 		case 1: // ----------- LISTAR ARTICULOS -----------
-			System.out.println("--- LISTA DE ARTICULOS ---");
-			if (!artContainer.isListaVacia()) {
-				for (Articulo art : artContainer.getListaArticulos()) {
-					System.out.println(art + " \n");
-				}
-			} else {
-				System.out.println("No hay articulos");
-			}
+			this.mostrarArticulos();
 			break;
 
 		case 2: // ---------- AGREGAR ARTICULO ---------------
@@ -140,7 +133,7 @@ public class MenuEmpleado {
 
 		case 3: // ---------- MODIFICAR ARTICULO POR ID ---------
 			// No se como simplificar esta logica
-			
+			this.mostrarArticulos();
 			System.out.println("Ingresa el ID del articulo");
 			ID = sc.nextInt();
 			
@@ -211,4 +204,15 @@ public class MenuEmpleado {
 	}
 		}
 
+	
+	private void mostrarArticulos(){
+		System.out.println("--- LISTA DE ARTICULOS ---");
+		if (!artContainer.isListaVacia()) {
+			for (Articulo art : artContainer.getListaArticulos()) {
+				System.out.println(art + " \n");
+			}
+		} else {
+			System.out.println("No hay articulos");
+		}
+	}
 }
