@@ -58,15 +58,10 @@ public class Articulo {
 	
 	// ************** METODOS PROPIOS DE LA CLASE **************
 	
-	// Para sumar stock, tambien necesario si el usuario resta una
-	// cantidad especifica de productos de su carrito, de manera que
-	// la cant eliminada se reintegre al stock real.
 	public void sumarStock(int cant) {
 		this.stock += cant;
 	}
 
-	// Para restar stock, se puede reutilizar para que el usuario
-	// quite una cantidad especifica de un articulo de su carrito.
 	public void restarStock(int cant) {
 		this.stock -= cant;
 	}

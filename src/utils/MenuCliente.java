@@ -58,8 +58,7 @@ public class MenuCliente {
 		Usuario cliente = user;
 		while (continuar) {
 			System.out.println("---Bienvenido " + cliente.getNombreUser() + "---");
-			System.out.println("Valor de carrito actual: $" + cliente.getCarrito());// Falta metodo calcular valor
-																					// actual
+			System.out.println("Valor de carrito actual: $" + cliente.getCarrito().getSubTotal());
 			System.out.println("¿Que desea hacer?");
 			System.out.println("1. Agregar articulo al carrito");
 			System.out.println("2. Quitar articulo del carrito");
@@ -168,7 +167,12 @@ public class MenuCliente {
 	// LOGEADO-------------------------------
 	private void mostrarListaDeArticulos() {
 		System.out.println("--- LISTA DE ARTICULOS ---");
+<<<<<<< HEAD
 		if (!artContainer.isListaVacia()) {
+=======
+		//Esta es la validacion. No FirstArt
+		if (artContainer != null) {
+>>>>>>> origin/rama-manuel
 			for (Articulo art : artContainer.getListaArticulos()) {
 				System.out.println(art + " \n");
 			}
@@ -222,13 +226,48 @@ public class MenuCliente {
 
 	// Opcion 2
 	private void eliminarArticuloDelCarrito(Usuario user) {
-		// Deberia ir verCarrito();
-		Usuario cliente = user;
-		Carrito carritoAct = cliente.getCarrito();
-		System.out.println("¿Que articulo desea eliminar?");
-
-		carritoAct.eliminarItem(art);
-
+		int id = 0;
+		int cantidad = 0;
+		Carrito carrito = user.getCarrito();
+		
+		if(carrito == null || carrito.getArticulos().isEmpty()) {
+			System.out.println("Actualmente no posee articulos en su carrito.");
+			return;
+		}
+		
+		for(Articulo articulo : carrito.getArticulos()) {
+			System.out.println(articulo.toString());
+		}
+		
+		System.out.println("Ingrese el ID del articulo que desea eliminar(0 para cancelar):");
+		id = sc.nextInt();
+		
+		if(id == 0) {
+			System.out.println("Accion cancelada.");
+			return;
+		}
+		
+		Articulo articuloEnStockGeneral = this.artContainer.getArticuloByID(id);
+		
+		if (articuloEnStockGeneral == null) {
+		    System.out.println("El ID ingresado no corresponde a un articulo valido.");
+		    return;
+		}
+		
+		do {
+			cantidad = sc.nextInt();
+			if(cantidad<0) {
+				System.out.println("La cantidad no puede ser negativa.");
+			}
+		}while(cantidad<0);
+		
+		if(carrito.eliminarItem(articuloEnStockGeneral, cantidad)) {
+			System.out.println("Se elimino o medifico la cantidad de articulos en el carrito de manera exitosa.");
+		}
+		else {
+			System.out.println("No fue posible eliminar o medificar la cantidad de articulos en el carrito.");
+			System.out.println("Revisa los datos ingresados y vuelvalo a intentar.");
+		}
 	}
 
 	// Opcion 3 Manejo de saldo, vuelve a ser un minimenu
@@ -289,5 +328,9 @@ public class MenuCliente {
 			// System.out.println(art.getNombre()+": "+ carritoAct.);
 		}
 
+	}
+	
+	private void pagar() {
+		
 	}
 }

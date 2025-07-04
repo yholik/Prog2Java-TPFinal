@@ -52,8 +52,13 @@ public class MenuEmpleado {
 				this.mostrarMenuEmpleado();
 				confirmado = true;
 			} else {
+<<<<<<< HEAD
 				System.out.println("Credenciales ingresadas incorrectas.");
 				System.out.println("Volviendo al menu principal......");
+=======
+				System.out.println("Credenciales ingresadas incorrectas \n" +
+			" Regresando al menu principal...");
+>>>>>>> origin/rama-manuel
 				confirmado = true;
 			}
 		} while (!confirmado);
