@@ -80,7 +80,7 @@ public class MenuCliente {
 			case 4:
 				break;
 			case 5:
-
+				pagar(cliente);
 				break;
 			case 6:
 				continuar = false;
@@ -168,7 +168,7 @@ public class MenuCliente {
 	private void mostrarListaDeArticulos() {
 		System.out.println("--- LISTA DE ARTICULOS ---");
 		//Esta es la validacion. No FirstArt
-		if (artContainer != null) {
+		if (artContainer.getListaArticulos() != null) {
 			for (Articulo art : artContainer.getListaArticulos()) {
 				System.out.println(art + " \n");
 			}
@@ -231,9 +231,7 @@ public class MenuCliente {
 			return;
 		}
 		
-		for(Articulo articulo : carrito.getArticulos()) {
-			System.out.println(articulo.toString());
-		}
+		carrito.toString();
 		
 		System.out.println("Ingrese el ID del articulo que desea eliminar(0 para cancelar):");
 		id = sc.nextInt();
@@ -258,7 +256,7 @@ public class MenuCliente {
 		}while(cantidad<0);
 		
 		if(carrito.eliminarItem(articuloEnStockGeneral, cantidad)) {
-			System.out.println("Se elimino o medifico la cantidad de articulos en el carrito de manera exitosa.");
+			System.out.println("Se elimino o modifico la cantidad de articulos en el carrito de manera exitosa.");
 		}
 		else {
 			System.out.println("No fue posible eliminar o medificar la cantidad de articulos en el carrito.");
@@ -326,7 +324,52 @@ public class MenuCliente {
 
 	}
 	
-	private void pagar() {
+	private void pagar(Usuario pagarUser) {
+		Carrito carrito = pagarUser.getCarrito();
+		int confirmarCompra = 0;
 		
+		if(carrito == null || carrito.getArticulos().isEmpty()) {
+			System.out.println("Actualmente no posee articulos en su carrito.");
+			return;
+		}
+		
+		double saldoUser = pagarUser.getSaldo();
+		double totalCarrito = carrito.getTotal();
+		double subtotalCarrito = carrito.getSubTotal();
+		
+		System.out.println("Compraras los siguientes articulos:");
+		System.out.println(carrito.toString());
+		System.out.println();
+		System.out.println("Se realizara un descuento del %15 si su compra supera los $12,000.00");
+		System.out.println("Subtotal: $" +subtotalCarrito);
+		System.out.println("Total: $" + totalCarrito + "\n");
+		
+		System.out.println("Su saldo actual: $" + saldoUser);
+		
+		do {
+			System.out.println("Deseas confirmar la compra? (1 para Si / 0 para No)");
+			confirmarCompra = sc.nextInt();
+			
+			 if (confirmarCompra != 0 && confirmarCompra != 1) {
+			        System.out.println("Opción invalida.");
+			    }
+			} while (confirmarCompra != 0 && confirmarCompra != 1);
+		
+		if(confirmarCompra == 0) {
+			System.out.println("Compra cancelada.");
+			return;
+		}
+		
+		if(saldoUser<totalCarrito) {
+			System.out.println("Saldo insuficiente. Compra cancelada.");
+		}
+		else {
+			carrito.vaciarCarrito();
+			
+			pagarUser.retirarSaldo(totalCarrito);
+			
+			System.out.println("La compra se ha realizado correctamente.");
+			System.out.println("Saldo actual: $" + pagarUser.getSaldo());
+		}
 	}
 }

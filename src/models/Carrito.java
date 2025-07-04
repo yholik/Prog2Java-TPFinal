@@ -23,7 +23,8 @@ public class Carrito {
 		
 		if(this.articulos!=null) {
 			for(int i=0; i<this.articulos.size(); i++) {
-				subTotal += this.articulos.get(i).getPrecioNeto();
+				Articulo aux = this.articulos.get(i);
+				subTotal += (aux.getPrecioNeto() * aux.getStock());
 			}
 		}
 		
@@ -91,9 +92,26 @@ public class Carrito {
 		
 	    return false;
 	}
+	
+	public void vaciarCarrito() {
+		this.articulos = new ArrayList<Articulo>(); 
+	}
+	
+	@Override
+	public String toString() {
+	    String nuevoString = "";
+
+	    if (this.articulos != null) {
+	        for (int i = 0; i < this.articulos.size(); i++) {
+	            nuevoString += this.articulos.get(i).toString() + "\n";
+	        }
+	    }
+
+	    return nuevoString;
+	}
 	//
 	// ******************* Metodos Privados ************************
-	public Articulo getArticuloById(int id) {
+	private Articulo getArticuloById(int id) {
 		if (this.articulos != null) {
 	        for (Articulo articulo : this.articulos) {
 	            if (articulo.getID() == id) {
