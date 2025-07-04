@@ -167,7 +167,8 @@ public class MenuCliente {
 	// LOGEADO-------------------------------
 	private void mostrarListaDeArticulos() {
 		System.out.println("--- LISTA DE ARTICULOS ---");
-		if (artContainer.getFirstArt() != null) {
+		//Esta es la validacion. No FirstArt
+		if (artContainer != null) {
 			for (Articulo art : artContainer.getListaArticulos()) {
 				System.out.println(art + " \n");
 			}
