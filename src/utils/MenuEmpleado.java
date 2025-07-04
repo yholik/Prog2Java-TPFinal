@@ -52,7 +52,9 @@ public class MenuEmpleado {
 				this.mostrarMenuEmpleado();
 				confirmado = true;
 			} else {
-				System.out.println("Credenciales ingresadas incorrectas");						
+				System.out.println("Credenciales ingresadas incorrectas.");
+				System.out.println("Volviendo al menu principal......");
+				confirmado = true;
 			}
 		} while (!confirmado);
 	}

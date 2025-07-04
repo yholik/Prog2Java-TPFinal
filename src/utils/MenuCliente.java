@@ -168,7 +168,7 @@ public class MenuCliente {
 	// LOGEADO-------------------------------
 	private void mostrarListaDeArticulos() {
 		System.out.println("--- LISTA DE ARTICULOS ---");
-		if (artContainer.getFirstArt() != null) {
+		if (!artContainer.isListaVacia()) {
 			for (Articulo art : artContainer.getListaArticulos()) {
 				System.out.println(art + " \n");
 			}
