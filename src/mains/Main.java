@@ -25,14 +25,13 @@ public class Main {
 		 */
 		
 		//CREO UN ARTICULO PARA PROBAR
-		
-		Articulo articulo1 = new Articulo(1, "Detergente" , 150, 2);
+
 		UsuarioContainer containerUser = new UsuarioContainer();
 		ArticuloContainer containerArticulo = new ArticuloContainer();
 		
 		
 		// ************ AÑADO EL ARTICULO A LA LISTA DEL CONTAINER ************
-		containerArticulo.agregarArticulo(articulo1);
+		
 		
 		
 		//**************ZONA DE INGRESO****************
@@ -72,8 +71,7 @@ public class Main {
 		
 		
 		// Al añadir el item al carrito del usuario, se baja el stock
-		usuarioActual.getCarrito().agregarItem(articulo1
-				, 2);		
+				
 		
 		
 		// *********** LISTANDO USUARIOS REGISTRADOS ****************

@@ -48,7 +48,11 @@ public class ArticuloContainer {
 		return articuloBuscado;
 	}
 	
-	public Articulo getFirstArt() {
-		return this.listaProductosSuper.get(0);
+	public boolean isListaVacia() {
+		boolean resultado = true;
+		if(this.getListaArticulos().size() > 0) {
+			resultado = false;
+		}
+		return resultado;
 	}
 }

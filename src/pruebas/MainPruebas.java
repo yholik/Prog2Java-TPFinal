@@ -1,10 +1,12 @@
 package pruebas;
 import models.Articulo;
+import models.Empleado;
 import models.Usuario;
 import java.util.ArrayList;
 import java.util.Scanner;
 import containers.UsuarioContainer;
 import mains.MainCliente;
+import mains.MainEmpleado;
 import containers.ArticuloContainer;
 
 public class MainPruebas {
@@ -13,6 +15,7 @@ public class MainPruebas {
 		Scanner sc = new Scanner(System.in);
 		UsuarioContainer containerUser = new UsuarioContainer();
 		ArticuloContainer artContainer = new ArticuloContainer();
+		Empleado empleado = new Empleado();
 		
 		boolean continuar = true;
 		int opc ;
@@ -27,7 +30,7 @@ public class MainPruebas {
 			
 			switch (opc) {
 			case 1:
-				
+				MainEmpleado.iniciar(empleado, artContainer, sc);
 				break;
 			case 2:
 				MainCliente.iniciar(containerUser, artContainer, sc);
