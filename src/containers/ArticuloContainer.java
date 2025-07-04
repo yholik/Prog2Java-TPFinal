@@ -1,5 +1,7 @@
 package containers;
 import models.Articulo;
+import models.Usuario;
+
 import java.util.ArrayList;
 
 // Esta clase contendra la lista completa de articulos que existen
@@ -15,7 +17,7 @@ public class ArticuloContainer {
 		this.listaProductosSuper = new ArrayList<Articulo>();
 	}
 	
-	// ****************** METODOS ********************
+	//------------- METODOS ------------------
 	
 	public void agregarArticulo(Articulo articulo) {
 		this.listaProductosSuper.add(articulo);
@@ -25,18 +27,13 @@ public class ArticuloContainer {
 		this.listaProductosSuper.remove(articulo);	
 		}
 	
-	// METODO PARA LISTAR LOS ARTICULOS EN SU TOTALIDAD
+	//------ LISTAR LOS ARTICULOS EN SU TOTALIDAD ---------------
 	public ArrayList<Articulo> getListaArticulos() {
 		ArrayList<Articulo> copiaListArticulos = new ArrayList<Articulo>(this.listaProductosSuper);
 		return copiaListArticulos;
 	}
 	
-	// BUSCAR UN PRODUCTO SEGUN ID 
-	/*
-	 *  Si quiero buscar por id, necesito un metodo que reciba esa info desde afuera
-	 *  luego la compare con los id de todos los articulos dentro de esta lista
-	 */
-	
+	// ------------ BUSCAR UN PRODUCTO SEGUN ID -----------------
 	public Articulo getArticuloByID(int articuloIDBuscado) {
 		Articulo articuloBuscado = null;
 		
@@ -51,4 +48,7 @@ public class ArticuloContainer {
 		return articuloBuscado;
 	}
 	
+	public Articulo getFirstArt() {
+		return this.listaProductosSuper.get(0);
+	}
 }
