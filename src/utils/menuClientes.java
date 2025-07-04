@@ -62,6 +62,18 @@ public class menuClientes {
 			System.out.println("2. Saldo(Agregar o Retirar)");
 			System.out.println("3. Ver carrito");
 			System.out.println("4. Pagar");
+			System.out.println("5. Salir");
+			int opc = sc.nextInt();
+			switch (opc) {
+			case 1:
+				agregarArticuloAlCarrito(cliente);
+				break;
+			case 2:
+				manejoSaldo(cliente);
+				break;
+			default:
+				break;
+			}
 		}
 
 	}
@@ -69,7 +81,7 @@ public class menuClientes {
 	// ------------------------- METODOS PARA MENU
 	// PRINCIPAL------------------------------
 	// Metodo de acceso cliente
-	public void accesoCliente() {
+	private void accesoCliente() {
 		// El ingreso es por DNI y Contrasenia
 		System.out.println("Ingrese su DNI de usuario:");
 		int dniIngresado = sc.nextInt();
@@ -90,7 +102,7 @@ public class menuClientes {
 
 	// Metodo de agregar nuevo usuario, se verifica que la contraseña se ingrese
 	// bien 2 veces
-	public void agregarNuevoUsuario() {
+	private void agregarNuevoUsuario() {
 		// Ingresa el dni a registrar
 		System.out.println("Ingrese el numero de DNI.");
 		int dniIngresado = sc.nextInt();
@@ -125,6 +137,7 @@ public class menuClientes {
 					Usuario nUsuario = new Usuario(nombreIngresado, nPassword, dniIngresado);
 					containerUser.agregarUsuario(nUsuario);
 					contraseniaValida = true;
+					System.out.println("El usuario se registro correctamente.");
 				}
 			} while (!contraseniaValida);
 
@@ -133,7 +146,6 @@ public class menuClientes {
 
 		}
 
-		System.out.println("El usuario se registro correctamente.");
 	}
 
 	// ------------------------ METODOS PARA MENU
@@ -145,15 +157,16 @@ public class menuClientes {
 		}
 	}
 
+	//
 	private void agregarArticuloAlCarrito(Usuario user) {
-		this.mostrarListaDeArticulos();
+		mostrarListaDeArticulos();
 		Usuario cliente = user;
 
 		System.out.println("Ingrese el ID del articulo:");
 		int id = sc.nextInt();
 		Articulo art = artContainer.getArticuloByID(id);
 
-		// Validacion si se puede agregar el articulo
+		// Validaciones si se puede agregar el articulo------------------------
 		if (art == null) {
 			System.out.println("No existe el articulo");
 			return;
@@ -162,19 +175,72 @@ public class menuClientes {
 			System.out.println("No hay stock");
 			return;
 		}
-		
-		System.out.println("Stock Disponible:"+ art.getStock());
+		// Hasta aca las validaciones
+		// ------------------------------------------------
+
+		System.out.println("Stock Disponible:" + art.getStock());
 		System.out.println("¿Cuantos desea agregar?");
 		int cant = sc.nextInt();
-		
+
 		// Validamos que haya stock
-		
-		if (cant <=0) {
+
+		if (cant <= 0) {
 			System.out.println("Error: debe comprar un cantidad mayor a cero.");
 			return;
 		}
-		
-		if(cant > art.getStock())
+
+		if (cant > art.getStock()) {
+			System.out.println("Error: no hay suficiente stock. Disponible: " + art.getStock());
+			return;
+		}
+
+		// Por fin agregamos el articulo
+		cliente.getCarrito().agregarItem(art, cant);
+		System.out.println(cant + "u de " + art.getNombre() + " agregadas al carrito");
+
+	}
+
+	// Manejo de saldo, vuelve a ser un minimenu
+	private void manejoSaldo(Usuario user) {
+		Usuario cliente = user;
+		boolean continuar = true;
+
+		while (continuar) {
+			System.out.println("Saldo actual: $" + cliente.getSaldo());
+			System.out.println("1. Agregar Saldo");
+			System.out.println("2. Retirar Saldo");
+			System.out.println("3. Salir");
+			int opc = sc.nextInt();
+			double cash;
+			switch (opc) {
+			case 1:
+				System.out.println("¿Cuanto quiere agregar?");
+				cash = sc.nextDouble();
+				if (cash > 0) {
+					cliente.agregarSaldo(cash);
+					System.out.println("¡Ingreso exitoso!");
+				} else {
+					System.out.println("Debe ingresar dinero en positivo.");
+				}
+				break;
+			case 2:
+				System.out.println("¿Cuanto desea retirar?");
+				cash = sc.nextDouble();
+				if (cash > 0) {
+					cliente.retirarSaldo(cash);
+					System.out.println("¡Retiro exitoso!");
+				} else {
+					System.out.println("Debe retirar dinero en positivo.");
+				}
+			case 3:
+				continuar = false;
+				break;
+			default:
+				System.out.println("Opcion invalida");
+				break;
+			}
+
+		}
 
 	}
 
