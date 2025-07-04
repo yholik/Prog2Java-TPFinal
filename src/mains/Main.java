@@ -48,12 +48,14 @@ public class Main {
 		String passU = sc.next();
 		System.out.println("Volve a ingresar tu clave");
 		String passUDos = sc.next();
+		System.out.println("Ingresa tu documento");
+		int documento = sc.nextInt();
 		
 		// *************** VERIFICACION CLAVE ********************
 		if(passUDos.equals(passU)) {
 			// Cuando creo este nuevo objeto en este ciclo, no puedo utilizarlo afuera
 			// TODO : Averiguar como solucionar esto
-			Usuario usuario = new Usuario(nombreU, passU);
+			Usuario usuario = new Usuario(nombreU, passU, documento);
 			containerUser.agregarUsuario(usuario);
 			System.out.println("Usuario añadido con exito");
 			confirmado = true;
@@ -69,11 +71,9 @@ public class Main {
 		Usuario usuarioActual = containerUser.getFirstUser();
 		
 		
-		
 		// Al añadir el item al carrito del usuario, se baja el stock
 		usuarioActual.getCarrito().agregarItem(articulo1
-				, 2);
-
+				, 2);		
 		
 		
 		// *********** LISTANDO USUARIOS REGISTRADOS ****************

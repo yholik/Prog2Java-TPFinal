@@ -2,15 +2,17 @@ package models;
 
 public class Usuario {
 
+	private int documentoID;
 	private String nombreUser;
 	private String passwordUser;
 	private double saldo;
 	private Carrito carrito;
 
 	// *************** CONSTRUCTOR DE USUARIO *******************
-	public Usuario(String nombre, String password) {
+	public Usuario(String nombre, String password, int documento) {
 		this.nombreUser = nombre;
 		this.passwordUser = password;
+		this.documentoID = documento;
 		this.saldo = 0; // SE DEBERA AGREGAR SALDO LUEGO DE CREAR USUARIO
 		this.carrito = new Carrito();
 	}
@@ -25,6 +27,10 @@ public class Usuario {
 	// ******************* GETTERS ************************
 	public String getNombreUser() {
 		return this.nombreUser;
+	}
+	
+	public int getID() {
+		return this.documentoID;
 	}
 
 	public double getSaldo() {
@@ -60,16 +66,4 @@ public class Usuario {
 		this.saldo -= importe;
 	}
 	// ************************************************************
-
-	/*
-	 * TODO REVISAR, SI EL USUARIO AL REGISTRAR COLOCA CLAVE, QUEREMOS QUE PUEDA
-	 * MODIFICARLA DESPUES? public void setPasswordUser(String passwordUser) {
-	 * this.passwordUser = passwordUser; }
-	 */
-
-	/*
-	 * TODO REVISAR: SI EL USUARIO SE CREA CON NOMBRE, QUEREMOS QUE PUEDA MODIFICAR
-	 * SU NOMBRE LUEGO? public void setNombreUser(String nombreUser) {
-	 * this.nombreUser = nombreUser; }
-	 */
 }
