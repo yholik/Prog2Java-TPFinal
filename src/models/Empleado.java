@@ -18,9 +18,12 @@ public class Empleado {
 		return this.nombre;
 	}
 	
-	//TODO Hacer un metodo validar contraseña, getPassword es mala practica
-	public String getPasswordEmpleado() {
-		return this.passwordEmpleado;
+	public boolean validarPassword(String claveIngresada) {
+		boolean validez = false;
+		if (this.passwordEmpleado.equals(claveIngresada)) {
+			validez = true;
+		}
+		return validez;
 	}
 	
 	

@@ -33,6 +33,7 @@ public class MainPruebas {
 				MainCliente.iniciar(containerUser, artContainer, sc);
 				break;
 			case 3:
+				continuar = false;
 				System.out.println("¡Gracias vuelva pronto!");
 			default:
 				System.out.println("¡Opcion invalida!");

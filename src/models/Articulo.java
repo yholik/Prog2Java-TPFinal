@@ -52,6 +52,10 @@ public class Articulo {
 		this.stock = stock;
 	}
 	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 	// ************** METODOS PROPIOS DE LA CLASE **************
 	
 	// Para sumar stock, tambien necesario si el usuario resta una
@@ -66,6 +70,5 @@ public class Articulo {
 	public void restarStock(int cant) {
 		this.stock -= cant;
 	}
-	
 	
 }
