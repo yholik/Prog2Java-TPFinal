@@ -44,14 +44,14 @@ public class Carrito {
 	// ******************* Metodos Funcionales ************************
 	//
 	//Agrega item al carrito y resta stock global
-	public void agregarItem(Articulo articuloEnStock, int cant) {
-		Articulo articuloExistenteCarrito = this.getArticuloById(articuloEnStock.getID());
+	public void agregarItem(Articulo articulEnStockGeneral, int cant) {
+		Articulo articuloExistenteCarrito = this.getArticuloById(articulEnStockGeneral.getID());
 		
 		if(articuloExistenteCarrito == null) {
 			Articulo nuevoArticuloCarrito = new Articulo(
-					articuloEnStock.getID(), 
-					articuloEnStock.getNombre(), 
-					articuloEnStock.getPrecioNeto(), 
+					articulEnStockGeneral.getID(), 
+					articulEnStockGeneral.getNombre(), 
+					articulEnStockGeneral.getPrecioNeto(), 
 					cant);
 				
 			this.articulos.add(nuevoArticuloCarrito);
@@ -60,39 +60,40 @@ public class Carrito {
 			articuloExistenteCarrito.sumarStock(cant);
 		}
 			
-		articuloEnStock.restarStock(cant);
+		articulEnStockGeneral.restarStock(cant);
 	}
+
 	//
-	//Elimina la totalidad del item del carrito y aumenta stock global
-	public void eliminarItemCompleto(Articulo articuloEnStockGlobal) {
-		for (Articulo item : articulos) {
-	        if (item.getID() == articuloEnStockGlobal.getID()) {
-	        	
-	        	articuloEnStockGlobal.sumarStock(item.getStock());
-	        	
-	            this.articulos.remove(item);
-	            
-	            break;
-	        }
-	    }
-	}
-	//
-	//Resta cantidad determinada del item del carrito y aumenta stock global
-	public void restarCantidadItem(Articulo articuloEnStockGlobal, int cantidad) {
-		for (Articulo item : articulos) {
-	        if (item.getID() == articuloEnStockGlobal.getID()) {
-	        	
-	        	articuloEnStockGlobal.sumarStock(cantidad);
-	        	
-	            item.restarStock(cantidad);;
-	            
-	            break;
-	        }
-	    }
+	//Resta cantidad determinada del item del carrito y aumenta stock global. 
+	//Si cantidad de articulo queda en 0 entonces se elimina
+	public boolean eliminarItem(Articulo articuloEnStockGeneral, int cantidad) {
+		int stockItem = 0;
+		
+		if(cantidad>=0) {
+			for (int i = 0; i < articulos.size(); i++) {
+		        Articulo item = articulos.get(i);
+		        if (item.getID() == articuloEnStockGeneral.getID()) {
+		            stockItem = item.getStock();
+
+		            if (stockItem <= cantidad) {
+		                cantidad = stockItem;
+		                articulos.remove(i);
+		            } else {
+		                item.restarStock(cantidad);
+		            }
+
+		            articuloEnStockGeneral.sumarStock(cantidad);
+		            
+		            return true;
+		        }
+		    }
+		}
+		
+	    return false;
 	}
 	//
 	// ******************* Metodos Privados ************************
-	private Articulo getArticuloById(int id) {
+	public Articulo getArticuloById(int id) {
 		if (this.articulos != null) {
 	        for (Articulo articulo : this.articulos) {
 	            if (articulo.getID() == id) {
