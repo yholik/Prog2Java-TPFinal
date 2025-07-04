@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import containers.ArticuloContainer;
 import containers.UsuarioContainer;
 
-public class menuClientes {
+public class MenuCliente {
 
 	private Usuario user;
 	private Articulo art;
@@ -16,7 +16,7 @@ public class menuClientes {
 	private UsuarioContainer containerUser;
 	private ArticuloContainer artContainer;
 
-	public menuClientes(UsuarioContainer containerUser, ArticuloContainer artContainer, Scanner sc) {
+	public MenuCliente(UsuarioContainer containerUser, ArticuloContainer artContainer, Scanner sc) {
 		this.containerUser = containerUser;
 		this.artContainer = artContainer;
 		this.sc = sc;
