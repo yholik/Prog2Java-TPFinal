@@ -137,7 +137,10 @@ public class MenuEmpleado {
 
 		case 3: // ---------- MODIFICAR ARTICULO POR ID ---------
 			// No se como simplificar esta logica
+			if(!artContainer.isListaVacia()) {
+				
 			this.mostrarArticulos();
+			
 			System.out.println("Ingresa el ID del articulo");
 			ID = sc.nextInt();
 			
@@ -177,10 +180,17 @@ public class MenuEmpleado {
 				System.out.println("--- Articulo no encontrado ---");
 				//ACA DEBERIA VOLVER AL MENU
 			}
+			
+			}else {
+				System.out.println("No hay articulos para modificar");
+			}
 			break;
 
 		case 4: // --------- ELIMINAR ARTICULO ------------
+			if(!artContainer.isListaVacia()) {
+			
 			do {
+				this.mostrarArticulos();
 				confirmado = false;
 				System.out.println("Ingresa el ID del articulo a eliminar");
 				ID = sc.nextInt();
@@ -193,6 +203,10 @@ public class MenuEmpleado {
 					System.out.println("No existe el articulo");
 				}
 			} while (!confirmado);
+			
+			}else {
+				System.out.println("No hay articulos para eliminar");
+			}
 			break;
 			
 		case 5: 
