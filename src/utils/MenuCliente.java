@@ -72,12 +72,13 @@ public class MenuCliente {
 				agregarArticuloAlCarrito(cliente);
 				break;
 			case 2:
-
+				eliminarArticuloDelCarrito(cliente);
 				break;
 			case 3:
 				manejoSaldo(cliente);
 				break;
 			case 4:
+				verCarrito(cliente);
 				break;
 			case 5:
 				pagar(cliente);
@@ -167,16 +168,15 @@ public class MenuCliente {
 	// LOGEADO-------------------------------
 	private void mostrarListaDeArticulos() {
 		System.out.println("--- LISTA DE ARTICULOS ---");
-		//Esta es la validacion. No FirstArt
-		if (artContainer.getListaArticulos() != null) {
+		if (artContainer.getListaArticulos() != null && !artContainer.isListaVacia()) {
 			for (Articulo art : artContainer.getListaArticulos()) {
 				System.out.println(art + " \n");
 			}
-		} else {
-			System.out.println("No hay articulos");
+		}
+		else {
+				System.out.println("No hay articulos");
 		}
 	}
-
 	// Opcion 1
 	private void agregarArticuloAlCarrito(Usuario user) {
 		mostrarListaDeArticulos();
@@ -225,40 +225,43 @@ public class MenuCliente {
 		int id = 0;
 		int cantidad = 0;
 		Carrito carrito = user.getCarrito();
-		
-		if(carrito == null || carrito.getArticulos().isEmpty()) {
+
+		if (carrito == null || carrito.getArticulos().isEmpty()) {
 			System.out.println("Actualmente no posee articulos en su carrito.");
 			return;
 		}
 		
-		carrito.toString();
+		System.out.println(carrito.toString());
 		
 		System.out.println("Ingrese el ID del articulo que desea eliminar(0 para cancelar):");
 		id = sc.nextInt();
-		
-		if(id == 0) {
+
+		if (id == 0) {
 			System.out.println("Accion cancelada.");
 			return;
 		}
-		
+
 		Articulo articuloEnStockGeneral = this.artContainer.getArticuloByID(id);
-		
+
 		if (articuloEnStockGeneral == null) {
-		    System.out.println("El ID ingresado no corresponde a un articulo valido.");
-		    return;
+			System.out.println("El ID ingresado no corresponde a un articulo valido.");
+			return;
 		}
 		
+		System.out.println("Ingrese la cantidad que desea eliminar:");
 		do {
 			cantidad = sc.nextInt();
-			if(cantidad<0) {
+			if (cantidad < 0) {
 				System.out.println("La cantidad no puede ser negativa.");
+				System.out.println("Ingrese la cantidad que desea eliminar:");
 			}
-		}while(cantidad<0);
-		
-		if(carrito.eliminarItem(articuloEnStockGeneral, cantidad)) {
-			System.out.println("Se elimino o modifico la cantidad de articulos en el carrito de manera exitosa.");
-		}
-		else {
+
+		} while (cantidad < 0);
+
+		if (carrito.eliminarItem(articuloEnStockGeneral, cantidad)) {
+			System.out.println("Se elimino o medifico la cantidad de articulos en el carrito de manera exitosa.");
+		} else {
+
 			System.out.println("No fue posible eliminar o medificar la cantidad de articulos en el carrito.");
 			System.out.println("Revisa los datos ingresados y vuelvalo a intentar.");
 		}
@@ -319,11 +322,10 @@ public class MenuCliente {
 		System.out.println("Nombre   |   Cantidad");
 		for (Articulo art : carritoAct.getArticulos()) {
 
-			// System.out.println(art.getNombre()+": "+ carritoAct.);
+			System.out.println(art.getNombre() + ": ");
 		}
 
 	}
-	
 	private void pagar(Usuario pagarUser) {
 		Carrito carrito = pagarUser.getCarrito();
 		int confirmarCompra = 0;
@@ -364,9 +366,9 @@ public class MenuCliente {
 			System.out.println("Saldo insuficiente. Compra cancelada.");
 		}
 		else {
-			carrito.vaciarCarrito();
-			
 			pagarUser.retirarSaldo(totalCarrito);
+			
+			carrito.vaciarCarrito();
 			
 			System.out.println("La compra se ha realizado correctamente.");
 			System.out.println("Saldo actual: $" + pagarUser.getSaldo());
