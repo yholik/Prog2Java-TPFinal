@@ -1,10 +1,10 @@
 package utils;
+
 import models.Empleado;
 import java.util.Scanner;
 import models.Articulo;
 import containers.ArticuloContainer;
 import containers.UsuarioContainer;
-
 
 /*
  * 1.Crear un metodo de confirmacion de respuesta SI o No 
@@ -23,8 +23,7 @@ public class MenuEmpleado {
 	private Scanner sc;
 	private ArticuloContainer artContainer;
 	Empleado empleadoAutorizado;
-	
-	
+
 	// --------- CONSTRUCTOR ---------
 	public MenuEmpleado(Empleado empleado, ArticuloContainer artContainer, Scanner sc) {
 		this.empleadoAutorizado = empleado;
@@ -52,13 +51,9 @@ public class MenuEmpleado {
 				this.mostrarMenuEmpleado();
 				confirmado = true;
 			} else {
-<<<<<<< HEAD
 				System.out.println("Credenciales ingresadas incorrectas.");
 				System.out.println("Volviendo al menu principal......");
-=======
-				System.out.println("Credenciales ingresadas incorrectas \n" +
-			" Regresando al menu principal...");
->>>>>>> origin/rama-manuel
+				System.out.println("Credenciales ingresadas incorrectas \n" + " Regresando al menu principal...");
 				confirmado = true;
 			}
 		} while (!confirmado);
@@ -68,8 +63,9 @@ public class MenuEmpleado {
 
 	public void mostrarMenuEmpleado() {
 		// ----- ZONA DE VARIABLES PARA ESTE METODO -----
-		/* 
-		 * Es importante que confirmado se reinicie SIEMPRE al comenzar un nuevo do-while 
+		/*
+		 * Es importante que confirmado se reinicie SIEMPRE al comenzar un nuevo
+		 * do-while
 		 */
 		boolean confirmado = false;
 		boolean ejecutarMenu = true;
@@ -78,141 +74,136 @@ public class MenuEmpleado {
 		String nombre;
 		double precio;
 		int stock;
-		
+
 		// -----------------------------------------------
-		
-		while(ejecutarMenu) {
+
+		while (ejecutarMenu) {
 			System.out.println("Selecciona una opcion");
-			System.out.println("1- Ver artículos \n" + 
-							   "2- Agregar artículo \n" +
-							   "3- Modificar artículo \n" +
-							   "4- Eliminar artículo \n" +
-							   "5- Volver al menu principal \n");
-		int opc = sc.nextInt();
-		switch (opc) {
-		case 1: // ----------- LISTAR ARTICULOS -----------
-			this.mostrarArticulos();
-			break;
+			System.out.println("1- Ver artículos \n" + "2- Agregar artículo \n" + "3- Modificar artículo \n"
+					+ "4- Eliminar artículo \n" + "5- Volver al menu principal \n");
+			int opc = sc.nextInt();
+			switch (opc) {
+			case 1: // ----------- LISTAR ARTICULOS -----------
+				this.mostrarArticulos();
+				break;
 
-		case 2: // ---------- AGREGAR ARTICULO ---------------
-				// ------- Ingresa ID del articulo ----------
-			do {
-				confirmado = false;
-				System.out.print("Ingresa ID del articulo");
-				ID = sc.nextInt();
-				if (artContainer.getArticuloByID(ID) != null) {
-					System.out.println("El ID ya esta en uso");
-				} else {
-					confirmado = true;
-				}
-			} while (!confirmado);
+			case 2: // ---------- AGREGAR ARTICULO ---------------
+					// ------- Ingresa ID del articulo ----------
+				do {
+					confirmado = false;
+					System.out.println("Ingresa ID del articulo");
+					ID = sc.nextInt();
+					if (artContainer.getArticuloByID(ID) != null) {
+						System.out.println("El ID ya esta en uso");
+					} else {
+						confirmado = true;
+					}
+				} while (!confirmado);
 
-			// -------- Ingresa nombre del articulo -----------
-			System.out.println("Ingresa el nombre del articulo");
-			nombre = sc.next();
-
-			// -------- Ingresa precio neto del articulo --------
-			do {
-				confirmado = false;
-				System.out.println("Ingresa el precio neto");
-				precio = sc.nextDouble();
-				if (precio == 0) {
-					System.out.println("No esta permitido poner articulos" + " con precio 0");
-				}
-			} while (precio <= 0);
-
-			// -------- Ingresa stock del articulo ---------
-			do {
-				confirmado = false;
-				System.out.println("Ingresa stock del articulo");
-				stock = sc.nextInt();
-				if (stock < 0) {
-					System.out.println("No podes ingresar stock negativo");
-				} else {
-					Articulo articuloNuevo = new Articulo(ID, nombre, precio, stock);
-					artContainer.agregarArticulo(articuloNuevo);
-					System.out.println("Articulo agregado con exito");
-					confirmado = true;
-				}
-			} while (!confirmado);
-
-			break;
-
-		case 3: // ---------- MODIFICAR ARTICULO POR ID ---------
-			// No se como simplificar esta logica
-			this.mostrarArticulos();
-			System.out.println("Ingresa el ID del articulo");
-			ID = sc.nextInt();
-			
-			if(artContainer.getArticuloByID(ID) != null) {
-			Articulo articuloModificar = artContainer.getArticuloByID(ID);
-
-			// ------------- NOMBRE ----------------
-			System.out.println("¿Queres modificar el nombre?");
-			respuesta = sc.next().toUpperCase().charAt(0);
-			if (respuesta == 'S') {
-				System.out.println("Ingresa el nuevo nombre");
+				// -------- Ingresa nombre del articulo -----------
+				System.out.println("Ingresa el nombre del articulo");
 				nombre = sc.next();
-				articuloModificar.setNombre(nombre);
-				System.out.println("Nombre modificado con exito");
-			}
 
-			// ----------- PRECIO ----------------
-			System.out.println("¿Queres modificar el precio?");
-			respuesta = sc.next().toUpperCase().charAt(0);
-			if (respuesta == 'S') {
-				System.out.println("Ingresa el nuevo precio");
-				precio = sc.nextDouble();
-				articuloModificar.setPrecioNeto(precio);
-				System.out.println("Precio modificado con exito");
-			}
+				// -------- Ingresa precio neto del articulo --------
+				do {
+					confirmado = false;
+					System.out.println("Ingresa el precio neto");
+					precio = sc.nextDouble();
+					if (precio == 0) {
+						System.out.println("No esta permitido poner articulos" + " con precio 0");
+					}
+				} while (precio <= 0);
 
-			// --------- STOCK -----------------
-			System.out.println("¿Queres modificar el stock?");
-			respuesta = sc.next().toUpperCase().charAt(0);
-			if (respuesta == 'S') {
-				System.out.println("Ingresa el nuevo stock");
-				stock = sc.nextInt();
-				articuloModificar.setStock(stock);
-				System.out.println("Stock modificado con exito");
-			}
-			}else{
-				System.out.println("--- Articulo no encontrado ---");
-				//ACA DEBERIA VOLVER AL MENU
-			}
-			break;
+				// -------- Ingresa stock del articulo ---------
+				do {
+					confirmado = false;
+					System.out.println("Ingresa stock del articulo");
+					stock = sc.nextInt();
+					if (stock < 0) {
+						System.out.println("No podes ingresar stock negativo");
+					} else {
+						Articulo articuloNuevo = new Articulo(ID, nombre, precio, stock);
+						artContainer.agregarArticulo(articuloNuevo);
+						System.out.println("Articulo agregado con exito");
+						confirmado = true;
+					}
+				} while (!confirmado);
 
-		case 4: // --------- ELIMINAR ARTICULO ------------
-			do {
-				confirmado = false;
-				System.out.println("Ingresa el ID del articulo a eliminar");
+				break;
+
+			case 3: // ---------- MODIFICAR ARTICULO POR ID ---------
+				// No se como simplificar esta logica
+				this.mostrarArticulos();
+				System.out.println("Ingresa el ID del articulo");
 				ID = sc.nextInt();
+
 				if (artContainer.getArticuloByID(ID) != null) {
-					Articulo artAEliminar = artContainer.getArticuloByID(ID);
-					artContainer.eliminarArticulo(artAEliminar);
-					System.out.println("Articuo eliminado con exito");
-					confirmado = true;
+					Articulo articuloModificar = artContainer.getArticuloByID(ID);
+
+					// ------------- NOMBRE ----------------
+					System.out.println("¿Queres modificar el nombre?");
+					respuesta = sc.next().toUpperCase().charAt(0);
+					if (respuesta == 'S') {
+						System.out.println("Ingresa el nuevo nombre");
+						nombre = sc.next();
+						articuloModificar.setNombre(nombre);
+						System.out.println("Nombre modificado con exito");
+					}
+
+					// ----------- PRECIO ----------------
+					System.out.println("¿Queres modificar el precio?");
+					respuesta = sc.next().toUpperCase().charAt(0);
+					if (respuesta == 'S') {
+						System.out.println("Ingresa el nuevo precio");
+						precio = sc.nextDouble();
+						articuloModificar.setPrecioNeto(precio);
+						System.out.println("Precio modificado con exito");
+					}
+
+					// --------- STOCK -----------------
+					System.out.println("¿Queres modificar el stock?");
+					respuesta = sc.next().toUpperCase().charAt(0);
+					if (respuesta == 'S') {
+						System.out.println("Ingresa el nuevo stock");
+						stock = sc.nextInt();
+						articuloModificar.setStock(stock);
+						System.out.println("Stock modificado con exito");
+					}
 				} else {
-					System.out.println("No existe el articulo");
+					System.out.println("--- Articulo no encontrado ---");
+					// ACA DEBERIA VOLVER AL MENU
 				}
-			} while (!confirmado);
-			break;
-			
-		case 5: 
-			System.out.println("Hasta luego " + empleadoAutorizado.getNombre());
-			ejecutarMenu = false;
-		break;
-		
-		default: 
-			System.out.println("*- ERROR INESPERADO -* \n"+
-						 	   "Contactar a soporte técnico");
-		}
+				break;
 
+			case 4: // --------- ELIMINAR ARTICULO ------------
+				do {
+					confirmado = false;
+					System.out.println("Ingresa el ID del articulo a eliminar");
+					ID = sc.nextInt();
+					if (artContainer.getArticuloByID(ID) != null) {
+						Articulo artAEliminar = artContainer.getArticuloByID(ID);
+						artContainer.eliminarArticulo(artAEliminar);
+						System.out.println("Articuo eliminado con exito");
+						confirmado = true;
+					} else {
+						System.out.println("No existe el articulo");
+					}
+				} while (!confirmado);
+				break;
+
+			case 5:
+				System.out.println("Hasta luego " + empleadoAutorizado.getNombre());
+				ejecutarMenu = false;
+				break;
+
+			default:
+				System.out.println("*- ERROR INESPERADO -* \n" + "Contactar a soporte técnico");
+			}
+
+		}
 	}
-		}
 
-	
-	private void mostrarArticulos(){
+	private void mostrarArticulos() {
 		System.out.println("--- LISTA DE ARTICULOS ---");
 		if (!artContainer.isListaVacia()) {
 			for (Articulo art : artContainer.getListaArticulos()) {
