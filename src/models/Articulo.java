@@ -19,10 +19,12 @@ public class Articulo {
 	// Para mostrar el modelo de articulo correctamente
 	@Override
 	public String toString() {
-		return "Articulo [ID=" + this.ID +
-				",\n nombre=" + this.nombre + 
-				",\n precioNeto=" + this.precioNeto + 
-				",\n stock=" + this.stock + "]";
+		return "Articulo \n " + 
+				"ID: " + this.ID +
+				",\n Nombre: " + this.nombre + 
+				",\n Precio Neto: " + this.precioNeto + 
+				",\n Stock: " + this.stock + 
+				"\n*-----------------*  ";
 	}
 	
 	// ******************* GETTERS *******************************

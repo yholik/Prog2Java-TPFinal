@@ -4,7 +4,10 @@ import models.Empleado;
 import java.util.Scanner;
 import models.Articulo;
 import containers.ArticuloContainer;
+<<<<<<< HEAD
 import containers.UsuarioContainer;
+=======
+>>>>>>> origin/master
 
 /*
  * 1.Crear un metodo de confirmacion de respuesta SI o No 
@@ -53,7 +56,12 @@ public class MenuEmpleado {
 			} else {
 				System.out.println("Credenciales ingresadas incorrectas.");
 				System.out.println("Volviendo al menu principal......");
+<<<<<<< HEAD
 				System.out.println("Credenciales ingresadas incorrectas \n" + " Regresando al menu principal...");
+=======
+				System.out.println("Credenciales ingresadas incorrectas \n" +
+			" Regresando al menu principal...");
+>>>>>>> origin/master
 				confirmado = true;
 			}
 		} while (!confirmado);
@@ -87,6 +95,7 @@ public class MenuEmpleado {
 				this.mostrarArticulos();
 				break;
 
+<<<<<<< HEAD
 			case 2: // ---------- AGREGAR ARTICULO ---------------
 					// ------- Ingresa ID del articulo ----------
 				do {
@@ -135,9 +144,120 @@ public class MenuEmpleado {
 				// No se como simplificar esta logica
 				this.mostrarArticulos();
 				System.out.println("Ingresa el ID del articulo");
+=======
+		case 2: // ---------- AGREGAR ARTICULO ---------------
+				// ------- Ingresa ID del articulo ----------
+			do {
+				confirmado = false;
+				System.out.println("Ingresa ID del articulo");
+				ID = sc.nextInt();
+				if (artContainer.getArticuloByID(ID) != null) {
+					System.out.println("El ID ya esta en uso");
+				} else {
+					confirmado = true;
+				}
+			} while (!confirmado);
+
+			// -------- Ingresa nombre del articulo -----------
+			System.out.println("Ingresa el nombre del articulo");
+			nombre = sc.next();
+
+			// -------- Ingresa precio neto del articulo --------
+			do {
+				confirmado = false;
+				System.out.println("Ingresa el precio neto");
+				precio = sc.nextDouble();
+				if (precio == 0) {
+					System.out.println("No esta permitido poner articulos" + " con precio 0");
+				}
+			} while (precio <= 0);
+
+			// -------- Ingresa stock del articulo ---------
+			do {
+				confirmado = false;
+				System.out.println("Ingresa stock del articulo");
+				stock = sc.nextInt();
+				if (stock < 0) {
+					System.out.println("No podes ingresar stock negativo");
+				} else {
+					Articulo articuloNuevo = new Articulo(ID, nombre, precio, stock);
+					artContainer.agregarArticulo(articuloNuevo);
+					System.out.println("Articulo agregado con exito");
+					System.out.println("--------------------------------------");
+					confirmado = true;
+				}
+			} while (!confirmado);
+
+			break;
+
+		case 3: // ---------- MODIFICAR ARTICULO POR ID ---------
+			// No se como simplificar esta logica
+			if(!artContainer.isListaVacia()) {
+				
+			this.mostrarArticulos();
+			
+			System.out.println("Ingresa el ID del articulo: ");
+			ID = sc.nextInt();
+			
+			if(artContainer.getArticuloByID(ID) != null) {
+			Articulo articuloModificar = artContainer.getArticuloByID(ID);
+
+			// ------------- NOMBRE ----------------
+			System.out.println("¿Queres modificar el nombre? (s-S para Si/Otro para No)");
+			respuesta = sc.next().toUpperCase().charAt(0);
+			if (respuesta == 'S') {
+				System.out.println("Ingresa el nuevo nombre");
+				nombre = sc.next();
+				articuloModificar.setNombre(nombre);
+				System.out.println("Nombre modificado con exito");
+				System.out.println("--------------------------------------");
+			}
+
+			// ----------- PRECIO ----------------
+			System.out.println("¿Queres modificar el precio? (s-S para Si/Otro para No)");
+			respuesta = sc.next().toUpperCase().charAt(0);
+			if (respuesta == 'S') {
+				System.out.println("Ingresa el nuevo precio");
+				precio = sc.nextDouble();
+				articuloModificar.setPrecioNeto(precio);
+				System.out.println("Precio modificado con exito");
+				System.out.println("--------------------------------------");
+			}
+
+			// --------- STOCK -----------------
+			System.out.println("¿Queres modificar el stock? (s-S para Si/Otro para No)");
+			respuesta = sc.next().toUpperCase().charAt(0);
+			if (respuesta == 'S') {
+				System.out.println("Ingresa el nuevo stock");
+				stock = sc.nextInt();
+				articuloModificar.setStock(stock);
+				System.out.println("Stock modificado con exito");
+				System.out.println("--------------------------------------");
+			}
+			}else{
+				System.out.println("--- Articulo no encontrado ---");
+				System.out.println("--------------------------------------");
+				//ACA DEBERIA VOLVER AL MENU
+			}
+			
+			}else {
+				System.out.println("No hay articulos para modificar");
+				System.out.println("--------------------------------------");
+			}
+			break;
+
+		case 4: // --------- ELIMINAR ARTICULO ------------
+			if(!artContainer.isListaVacia()) {
+			
+			do {
+				this.mostrarArticulos();
+				confirmado = false;
+				System.out.println("Ingresa el ID del articulo a eliminar");
+>>>>>>> origin/master
 				ID = sc.nextInt();
 
 				if (artContainer.getArticuloByID(ID) != null) {
+<<<<<<< HEAD
 					Articulo articuloModificar = artContainer.getArticuloByID(ID);
 
 					// ------------- NOMBRE ----------------
@@ -174,6 +294,34 @@ public class MenuEmpleado {
 					// ACA DEBERIA VOLVER AL MENU
 				}
 				break;
+=======
+					Articulo artAEliminar = artContainer.getArticuloByID(ID);
+					artContainer.eliminarArticulo(artAEliminar);
+					System.out.println("Articuo eliminado con exito");
+					System.out.println("--------------------------------------");
+					confirmado = true;
+				} else {
+					System.out.println("No existe el articulo");
+					System.out.println("--------------------------------------");
+				}
+			} while (!confirmado);
+			
+			}else {
+				System.out.println("No hay articulos para eliminar");
+				System.out.println("--------------------------------------");
+			}
+			break;
+			
+		case 5: 
+			System.out.println("Hasta luego " + empleadoAutorizado.getNombre());
+			ejecutarMenu = false;
+		break;
+		
+		default: 
+			System.out.println("*- ERROR INESPERADO -* \n"+
+						 	   "Contactar a soporte técnico");
+		}
+>>>>>>> origin/master
 
 			case 4: // --------- ELIMINAR ARTICULO ------------
 				do {
@@ -211,6 +359,7 @@ public class MenuEmpleado {
 			}
 		} else {
 			System.out.println("No hay articulos");
+			System.out.println("--------------------------------------");
 		}
 	}
 }

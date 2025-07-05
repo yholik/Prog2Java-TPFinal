@@ -1,8 +1,5 @@
 package pruebas;
-import models.Articulo;
 import models.Empleado;
-import models.Usuario;
-import java.util.ArrayList;
 import java.util.Scanner;
 import containers.UsuarioContainer;
 import mains.MainCliente;
@@ -38,6 +35,7 @@ public class MainPruebas {
 			case 3:
 				continuar = false;
 				System.out.println("¡Gracias vuelva pronto!");
+				break;
 			default:
 				System.out.println("¡Opcion invalida!");
 				break;
