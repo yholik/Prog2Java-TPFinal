@@ -148,7 +148,7 @@ public class MenuEmpleado {
 			Articulo articuloModificar = artContainer.getArticuloByID(ID);
 
 			// ------------- NOMBRE ----------------
-			System.out.println("¿Queres modificar el nombre?");
+			System.out.println("¿Queres modificar el nombre? (s-S para Si/Otro para No)");
 			respuesta = sc.next().toUpperCase().charAt(0);
 			if (respuesta == 'S') {
 				System.out.println("Ingresa el nuevo nombre");
@@ -158,7 +158,7 @@ public class MenuEmpleado {
 			}
 
 			// ----------- PRECIO ----------------
-			System.out.println("¿Queres modificar el precio?");
+			System.out.println("¿Queres modificar el precio? (s-S para Si/Otro para No)");
 			respuesta = sc.next().toUpperCase().charAt(0);
 			if (respuesta == 'S') {
 				System.out.println("Ingresa el nuevo precio");
@@ -168,7 +168,7 @@ public class MenuEmpleado {
 			}
 
 			// --------- STOCK -----------------
-			System.out.println("¿Queres modificar el stock?");
+			System.out.println("¿Queres modificar el stock? (s-S para Si/Otro para No)");
 			respuesta = sc.next().toUpperCase().charAt(0);
 			if (respuesta == 'S') {
 				System.out.println("Ingresa el nuevo stock");

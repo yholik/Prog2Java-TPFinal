@@ -19,27 +19,27 @@ public class Carrito {
 	//
 	//Total sin descuento
 	public double getSubTotal() {
-		double subTotal = 0;
-		
-		if(this.articulos!=null) {
-			for(int i=0; i<this.articulos.size(); i++) {
-				Articulo aux = this.articulos.get(i);
-				subTotal += (aux.getPrecioNeto() * aux.getStock());
-			}
-		}
-		
-		return subTotal;
+	    double subTotal = 0;
+
+	    if (this.articulos != null) {
+	        for (int i = 0; i < this.articulos.size(); i++) {
+	            Articulo aux = this.articulos.get(i);
+	            subTotal += (aux.getPrecioNeto() * aux.getStock());
+	        }
+	    }
+
+	    return Math.round(subTotal * 100.0) / 100.0;
 	}
 	//
 	//Total sin descuento
 	public double getTotal() {
-		double total = this.getSubTotal();
-		
-		if(total>PRECIO_LIMITE_DESCUENTO) {
-			total = total - (total * PORCENTAJE_DESCUENTO);
-		}
-		
-		return total;
+	    double total = this.getSubTotal();
+
+	    if (total > PRECIO_LIMITE_DESCUENTO) {
+	        total = total - (total * PORCENTAJE_DESCUENTO);
+	    }
+
+	    return Math.round(total * 100.0) / 100.0;
 	}
 	//
 	// ******************* Metodos Funcionales ************************

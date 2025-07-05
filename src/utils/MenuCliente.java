@@ -248,7 +248,8 @@ public class MenuCliente {
 			return;
 		}
 		
-		System.out.println("Ingrese la cantidad que desea eliminar:");
+		System.out.println("Ingrese la cantidad que desea eliminar.");
+		System.out.println("Si la cantidad supera o iguala la existente, se eliminara el ítem del carrito.");
 		do {
 			cantidad = sc.nextInt();
 			if (cantidad < 0) {
@@ -263,7 +264,7 @@ public class MenuCliente {
 		} else {
 
 			System.out.println("No fue posible eliminar o medificar la cantidad de articulos en el carrito.");
-			System.out.println("Revisa los datos ingresados y vuelvalo a intentar.");
+			System.out.println("Revise los datos ingresados y vuelvelo a intentar.");
 		}
 	}
 
@@ -311,7 +312,7 @@ public class MenuCliente {
 
 	}
 
-	// Opcion 3 ver carrito
+	// Opcion 4 ver carrito
 	private void verCarrito(Usuario cliente) {
 		Carrito carritoAct = cliente.getCarrito();
 		if (carritoAct == null || carritoAct.getArticulos().isEmpty()) {
@@ -319,11 +320,7 @@ public class MenuCliente {
 			return;
 		}
 		System.out.println("--- MI CARRITO ---");
-		System.out.println("Nombre   |   Cantidad");
-		for (Articulo art : carritoAct.getArticulos()) {
-
-			System.out.println(art.getNombre() + ": ");
-		}
+		System.out.println(carritoAct.toString());
 
 	}
 	private void pagar(Usuario pagarUser) {
@@ -341,7 +338,6 @@ public class MenuCliente {
 		
 		System.out.println("Compraras los siguientes articulos:");
 		System.out.println(carrito.toString());
-		System.out.println();
 		System.out.println("Se realizara un descuento del %15 si su compra supera los $12,000.00");
 		System.out.println("Subtotal: $" +subtotalCarrito);
 		System.out.println("Total: $" + totalCarrito + "\n");
