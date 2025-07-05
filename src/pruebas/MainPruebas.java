@@ -1,8 +1,5 @@
 package pruebas;
-import models.Articulo;
 import models.Empleado;
-import models.Usuario;
-import java.util.ArrayList;
 import java.util.Scanner;
 import containers.UsuarioContainer;
 import mains.MainCliente;

@@ -1,7 +1,5 @@
 package containers;
 import models.Articulo;
-import models.Usuario;
-
 import java.util.ArrayList;
 
 // Esta clase contendra la lista completa de articulos que existen

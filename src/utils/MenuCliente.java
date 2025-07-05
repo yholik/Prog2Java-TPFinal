@@ -1,18 +1,12 @@
 package utils;
-
 import java.util.Scanner;
-
 import models.Articulo;
 import models.Carrito;
 import models.Usuario;
-import java.util.ArrayList;
 import containers.ArticuloContainer;
 import containers.UsuarioContainer;
 
 public class MenuCliente {
-
-	private Usuario user;
-	private Articulo art;
 	private Scanner sc;
 	private UsuarioContainer containerUser;
 	private ArticuloContainer artContainer;

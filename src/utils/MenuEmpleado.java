@@ -3,8 +3,6 @@ import models.Empleado;
 import java.util.Scanner;
 import models.Articulo;
 import containers.ArticuloContainer;
-import containers.UsuarioContainer;
-
 
 /*
  * 1.Crear un metodo de confirmacion de respuesta SI o No 
@@ -95,7 +93,7 @@ public class MenuEmpleado {
 				// ------- Ingresa ID del articulo ----------
 			do {
 				confirmado = false;
-				System.out.print("Ingresa ID del articulo");
+				System.out.println("Ingresa ID del articulo");
 				ID = sc.nextInt();
 				if (artContainer.getArticuloByID(ID) != null) {
 					System.out.println("El ID ya esta en uso");
@@ -129,6 +127,7 @@ public class MenuEmpleado {
 					Articulo articuloNuevo = new Articulo(ID, nombre, precio, stock);
 					artContainer.agregarArticulo(articuloNuevo);
 					System.out.println("Articulo agregado con exito");
+					System.out.println("--------------------------------------");
 					confirmado = true;
 				}
 			} while (!confirmado);
@@ -141,7 +140,7 @@ public class MenuEmpleado {
 				
 			this.mostrarArticulos();
 			
-			System.out.println("Ingresa el ID del articulo");
+			System.out.println("Ingresa el ID del articulo: ");
 			ID = sc.nextInt();
 			
 			if(artContainer.getArticuloByID(ID) != null) {
@@ -155,6 +154,7 @@ public class MenuEmpleado {
 				nombre = sc.next();
 				articuloModificar.setNombre(nombre);
 				System.out.println("Nombre modificado con exito");
+				System.out.println("--------------------------------------");
 			}
 
 			// ----------- PRECIO ----------------
@@ -165,6 +165,7 @@ public class MenuEmpleado {
 				precio = sc.nextDouble();
 				articuloModificar.setPrecioNeto(precio);
 				System.out.println("Precio modificado con exito");
+				System.out.println("--------------------------------------");
 			}
 
 			// --------- STOCK -----------------
@@ -175,14 +176,17 @@ public class MenuEmpleado {
 				stock = sc.nextInt();
 				articuloModificar.setStock(stock);
 				System.out.println("Stock modificado con exito");
+				System.out.println("--------------------------------------");
 			}
 			}else{
 				System.out.println("--- Articulo no encontrado ---");
+				System.out.println("--------------------------------------");
 				//ACA DEBERIA VOLVER AL MENU
 			}
 			
 			}else {
 				System.out.println("No hay articulos para modificar");
+				System.out.println("--------------------------------------");
 			}
 			break;
 
@@ -198,14 +202,17 @@ public class MenuEmpleado {
 					Articulo artAEliminar = artContainer.getArticuloByID(ID);
 					artContainer.eliminarArticulo(artAEliminar);
 					System.out.println("Articuo eliminado con exito");
+					System.out.println("--------------------------------------");
 					confirmado = true;
 				} else {
 					System.out.println("No existe el articulo");
+					System.out.println("--------------------------------------");
 				}
 			} while (!confirmado);
 			
 			}else {
 				System.out.println("No hay articulos para eliminar");
+				System.out.println("--------------------------------------");
 			}
 			break;
 			
@@ -231,6 +238,7 @@ public class MenuEmpleado {
 			}
 		} else {
 			System.out.println("No hay articulos");
+			System.out.println("--------------------------------------");
 		}
 	}
 }
