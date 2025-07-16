@@ -21,5 +21,3 @@ Trabajo Práctico Final para la materia Programación II (Tecnicatura en Program
 - Git y GitHub para control de versiones
 
 ---
-
-## 📁 Estructura del proyecto
